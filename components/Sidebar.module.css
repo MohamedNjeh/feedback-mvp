@@ -1,0 +1,139 @@
+.sidebar {
+  width: 240px;
+  background: #ffffff;
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+[dir="rtl"] .sidebar {
+  left: auto;
+  right: 0;
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+.sidebarHeader {
+  padding: 24px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dashboardLogo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.businessName {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.languageSwitcher {
+  display: flex;
+  gap: 4px;
+}
+
+.sidebarNav {
+  flex: 1;
+  padding: 16px 0;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+}
+
+[dir="rtl"] .navItem {
+  text-align: right;
+}
+
+.navItem:hover {
+  background: #F8F9FA;
+  color: var(--text-primary);
+}
+
+.navItemActive {
+  background: #EEF4FF;
+  color: var(--primary);
+}
+
+.navItemActive:hover {
+  background: #EEF4FF;
+  color: var(--primary);
+}
+
+.navIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.alertBadge {
+  margin-left: auto;
+  background: #FF4D4F;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+
+[dir="rtl"] .alertBadge {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.sidebarFooter {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 0;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+[dir="rtl"] .logoutButton {
+  text-align: right;
+}
+
+.logoutButton:hover {
+  color: #FF4D4F;
+}

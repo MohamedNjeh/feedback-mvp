@@ -1,0 +1,1270 @@
+{
+  "branding": {
+    "title": {
+      "en": "Branding",
+      "fr": "Personnalisation",
+      "ar": "العلامة التجارية"
+    },
+    "subtitle": {
+      "en": "Customize the appearance of your feedback page",
+      "fr": "Personnalisez l'apparence de votre page de commentaires",
+      "ar": "خصص مظهر صفحة التعليقات الخاصة بك"
+    },
+    "save": {
+      "en": "Save Changes",
+      "fr": "Enregistrer",
+      "ar": "حفظ التغييرات"
+    },
+    "saving": {
+      "en": "Saving...",
+      "fr": "Enregistrement...",
+      "ar": "جارٍ الحفظ..."
+    },
+    "reset": {
+      "en": "Reset to Default",
+      "fr": "Réinitialiser",
+      "ar": "إعادة التعيين"
+    },
+    "saved": {
+      "en": "Branding saved successfully!",
+      "fr": "Personnalisation enregistrée avec succès !",
+      "ar": "تم حفظ العلامة التجارية بنجاح!"
+    },
+    "preview": {
+      "en": "Live Preview",
+      "fr": "Aperçu en direct",
+      "ar": "معاينة مباشرة"
+    },
+    "logo": {
+      "title": {
+        "en": "Logo",
+        "fr": "Logo",
+        "ar": "الشعار"
+      },
+      "upload": {
+        "en": "Upload Logo",
+        "fr": "Télécharger le logo",
+        "ar": "تحميل الشعار"
+      },
+      "remove": {
+        "en": "Remove",
+        "fr": "Supprimer",
+        "ar": "إزالة"
+      },
+      "size": {
+        "en": "Logo Size",
+        "fr": "Taille du logo",
+        "ar": "حجم الشعار"
+      },
+      "shape": {
+        "en": "Logo Shape",
+        "fr": "Forme du logo",
+        "ar": "شكل الشعار"
+      },
+      "small": {
+        "en": "Small",
+        "fr": "Petit",
+        "ar": "صغير"
+      },
+      "medium": {
+        "en": "Medium",
+        "fr": "Moyen",
+        "ar": "متوسط"
+      },
+      "large": {
+        "en": "Large",
+        "fr": "Grand",
+        "ar": "كبير"
+      },
+      "square": {
+        "en": "Square",
+        "fr": "Carré",
+        "ar": "مربع"
+      },
+      "rounded": {
+        "en": "Rounded",
+        "fr": "Arrondi",
+        "ar": "مستدير"
+      },
+      "circle": {
+        "en": "Circle",
+        "fr": "Cercle",
+        "ar": "دائري"
+      },
+      "drop_hint": {
+        "en": "Click to upload or drag and drop",
+        "fr": "Cliquez pour télécharger ou glissez-déposez",
+        "ar": "انقر للتحميل أو اسحب وأفلت"
+      },
+      "formats": {
+        "en": "PNG, JPG, SVG up to 2MB",
+        "fr": "PNG, JPG, SVG jusqu'à 2Mo",
+        "ar": "PNG، JPG، SVG حتى 2 ميجابايت"
+      }
+    },
+    "colors": {
+      "title": {
+        "en": "Brand Colors",
+        "fr": "Couleurs de marque",
+        "ar": "ألوان العلامة التجارية"
+      },
+      "primary": {
+        "en": "Primary Color",
+        "fr": "Couleur principale",
+        "ar": "اللون الرئيسي"
+      },
+      "secondary": {
+        "en": "Secondary Color",
+        "fr": "Couleur secondaire",
+        "ar": "اللون الثانوي"
+      },
+      "background": {
+        "en": "Background Color",
+        "fr": "Couleur de fond",
+        "ar": "لون الخلفية"
+      },
+      "accent": {
+        "en": "Accent Color",
+        "fr": "Couleur d'accent",
+        "ar": "لون التمييز"
+      }
+    },
+    "typography": {
+      "title": {
+        "en": "Typography",
+        "fr": "Typographie",
+        "ar": "الخطوط"
+      },
+      "font_family": {
+        "en": "Font Family",
+        "fr": "Police de caractères",
+        "ar": "نوع الخط"
+      },
+      "title_size": {
+        "en": "Title Size",
+        "fr": "Taille du titre",
+        "ar": "حجم العنوان"
+      },
+      "subtitle_size": {
+        "en": "Subtitle Size",
+        "fr": "Taille du sous-titre",
+        "ar": "حجم العنوان الفرعي"
+      },
+      "body_size": {
+        "en": "Body Size",
+        "fr": "Taille du texte",
+        "ar": "حجم النص"
+      },
+      "font_weight": {
+        "en": "Font Weight",
+        "fr": "Épaisseur de police",
+        "ar": "وزن الخط"
+      },
+      "light": {
+        "en": "Light",
+        "fr": "Léger",
+        "ar": "خفيف"
+      },
+      "normal": {
+        "en": "Normal",
+        "fr": "Normal",
+        "ar": "عادي"
+      },
+      "medium": {
+        "en": "Medium",
+        "fr": "Moyen",
+        "ar": "متوسط"
+      },
+      "semibold": {
+        "en": "Semi-bold",
+        "fr": "Semi-gras",
+        "ar": "شبه عريض"
+      },
+      "bold": {
+        "en": "Bold",
+        "fr": "Gras",
+        "ar": "عريض"
+      }
+    },
+    "layout": {
+      "title": {
+        "en": "Layout Options",
+        "fr": "Options de mise en page",
+        "ar": "خيارات التخطيط"
+      },
+      "header_style": {
+        "en": "Header Style",
+        "fr": "Style d'en-tête",
+        "ar": "نمط الرأس"
+      },
+      "card_style": {
+        "en": "Card Style",
+        "fr": "Style de carte",
+        "ar": "نمط البطاقة"
+      },
+      "spacing": {
+        "en": "Spacing",
+        "fr": "Espacement",
+        "ar": "التباعد"
+      },
+      "minimal": {
+        "en": "Minimal",
+        "fr": "Minimal",
+        "ar": "بسيط"
+      },
+      "centered": {
+        "en": "Centered",
+        "fr": "Centré",
+        "ar": "متوسط"
+      },
+      "full_width": {
+        "en": "Full Width",
+        "fr": "Pleine largeur",
+        "ar": "عرض كامل"
+      },
+      "flat": {
+        "en": "Flat",
+        "fr": "Plat",
+        "ar": "مسطح"
+      },
+      "elevated": {
+        "en": "Elevated",
+        "fr": "Élevé",
+        "ar": "مرتفع"
+      },
+      "bordered": {
+        "en": "Bordered",
+        "fr": "Bordé",
+        "ar": "محاط"
+      },
+      "compact": {
+        "en": "Compact",
+        "fr": "Compact",
+        "ar": "مدمج"
+      },
+      "comfortable": {
+        "en": "Comfortable",
+        "fr": "Confortable",
+        "ar": "مريح"
+      },
+      "spacious": {
+        "en": "Spacious",
+        "fr": "Spacieux",
+        "ar": "واسع"
+      },
+      "show_sentiment": {
+        "en": "Show Sentiment Icons",
+        "fr": "Afficher les icônes de sentiment",
+        "ar": "إظهار أيقونات المشاعر"
+      }
+    },
+    "custom": {
+      "title": {
+        "en": "Custom Branding",
+        "fr": "Personnalisation avancée",
+        "ar": "تخصيص متقدم"
+      },
+      "slogan": {
+        "en": "Slogan",
+        "fr": "Slogan",
+        "ar": "الشعار"
+      },
+      "slogan_placeholder": {
+        "en": "Your tagline or welcome message",
+        "fr": "Votre accroche ou message de bienvenue",
+        "ar": "عبارتك الترويجية أو رسالة الترحيب"
+      },
+      "thank_you": {
+        "en": "Thank You Message",
+        "fr": "Message de remerciement",
+        "ar": "رسالة الشكر"
+      },
+      "thank_you_placeholder": {
+        "en": "Message shown after feedback submission",
+        "fr": "Message affiché après l'envoi du commentaire",
+        "ar": "الرسالة المعروضة بعد إرسال التعليق"
+      },
+      "cta_text": {
+        "en": "Button Text",
+        "fr": "Texte du bouton",
+        "ar": "نص الزر"
+      },
+      "cta_text_placeholder": {
+        "en": "e.g. Submit Feedback",
+        "fr": "ex. Envoyer le commentaire",
+        "ar": "مثال: إرسال التعليق"
+      },
+      "cta_color": {
+        "en": "Button Color",
+        "fr": "Couleur du bouton",
+        "ar": "لون الزر"
+      },
+      "lang_switcher_color": {
+        "en": "Language Switcher Color",
+        "fr": "Couleur du sélecteur de langue",
+        "ar": "لون محول اللغة"
+      }
+    },
+    "sections": {
+      "logo": {
+        "en": "Logo",
+        "fr": "Logo",
+        "ar": "الشعار"
+      },
+      "colors": {
+        "en": "Colors",
+        "fr": "Couleurs",
+        "ar": "الألوان"
+      },
+      "typography": {
+        "en": "Typography",
+        "fr": "Typographie",
+        "ar": "الخطوط"
+      },
+      "layout": {
+        "en": "Layout",
+        "fr": "Mise en page",
+        "ar": "التخطيط"
+      },
+      "custom": {
+        "en": "Custom",
+        "fr": "Personnalisé",
+        "ar": "مخصص"
+      }
+    }
+  },
+  "alerts": {
+    "title": {
+      "en": "Alerts",
+      "fr": "Alertes",
+      "ar": "التنبيهات"
+    },
+    "need_attention": {
+      "en": "{{count}} alert needs attention",
+      "en_plural": "{{count}} alerts need attention",
+      "fr": "{{count}} alerte nécessite attention",
+      "fr_plural": "{{count}} alertes nécessitent attention",
+      "ar": "{{count}} تنبيه يحتاج اهتمام",
+      "ar_plural": "{{count}} تنبيهات تحتاج اهتمام"
+    },
+    "all_clear": {
+      "en": "All Clear!",
+      "fr": "Tout est en ordre !",
+      "ar": "كل شيء على ما يرام!"
+    },
+    "no_alerts": {
+      "en": "No alerts at the moment. Keep up the great work!",
+      "fr": "Aucune alerte pour le moment. Continuez votre excellent travail !",
+      "ar": "لا توجد تنبيهات في الوقت الحالي. استمر في العمل الرائع!"
+    },
+    "mark_resolved": {
+      "en": "Mark Resolved",
+      "fr": "Marquer comme résolu",
+      "ar": "وضع علامة تم الحل"
+    },
+    "view_details": {
+      "en": "View Details",
+      "fr": "Voir les détails",
+      "ar": "عرض التفاصيل"
+    },
+    "alert_details": {
+      "en": "Alert Details",
+      "fr": "Détails de l'alerte",
+      "ar": "تفاصيل التنبيه"
+    },
+    "alert_reason": {
+      "en": "Alert Reason",
+      "fr": "Raison de l'alerte",
+      "ar": "سبب التنبيه"
+    },
+    "low_rating": {
+      "en": "Low rating",
+      "fr": "Note basse",
+      "ar": "تقييم منخفض"
+    },
+    "contains_keyword": {
+      "en": "Contains negative word: \"{{keyword}}\"",
+      "fr": "Contient un mot négatif : \"{{keyword}}\"",
+      "ar": "يحتوي على كلمة سلبية: \"{{keyword}}\""
+    }
+  },
+  "feedback": {
+    "title": {
+      "en": "All Feedback",
+      "fr": "Tous les commentaires",
+      "ar": "جميع التعليقات"
+    },
+    "total_responses": {
+      "en": "{{count}} total response",
+      "en_plural": "{{count}} total responses",
+      "fr": "{{count}} réponse au total",
+      "fr_plural": "{{count}} réponses au total",
+      "ar": "{{count}} رد إجمالي",
+      "ar_plural": "{{count}} ردود إجمالية"
+    },
+    "filter_all": {
+      "en": "All",
+      "fr": "Tous",
+      "ar": "الكل"
+    },
+    "filter_positive": {
+      "en": "Positive",
+      "fr": "Positifs",
+      "ar": "إيجابي"
+    },
+    "filter_negative": {
+      "en": "Negative",
+      "fr": "Négatifs",
+      "ar": "سلبي"
+    },
+    "filter_with_image": {
+      "en": "With Image",
+      "fr": "Avec photo",
+      "ar": "مع صورة"
+    },
+    "no_results": {
+      "en": "No feedback found matching your filter.",
+      "fr": "Aucun commentaire ne correspond à votre filtre.",
+      "ar": "لم يتم العثور على تعليقات تطابق الفلتر."
+    }
+  },
+  "tables": {
+    "title": {
+      "en": "Tables Management",
+      "fr": "Gestion des tables",
+      "ar": "إدارة الطاولات"
+    },
+    "subtitle": {
+      "en": "Generate and manage QR codes for your restaurant tables.",
+      "fr": "Générez et gérez les codes QR pour les tables de votre restaurant.",
+      "ar": "إنشاء وإدارة رموز QR لطاولات مطعمك."
+    },
+    "generate_title": {
+      "en": "Generate Tables",
+      "fr": "Générer des tables",
+      "ar": "إنشاء طاولات"
+    },
+    "generate_description": {
+      "en": "Enter the number of tables in your restaurant. Each table will get a unique QR code that customers can scan to leave feedback.",
+      "fr": "Entrez le nombre de tables dans votre restaurant. Chaque table recevra un code QR unique que les clients peuvent scanner pour laisser un avis.",
+      "ar": "أدخل عدد الطاولات في مطعمك. ستحصل كل طاولة على رمز QR فريد يمكن للعملاء مسحه لترك تعليق."
+    },
+    "number_of_tables": {
+      "en": "Number of Tables",
+      "fr": "Nombre de tables",
+      "ar": "عدد الطاولات"
+    },
+    "placeholder": {
+      "en": "e.g. 10",
+      "fr": "ex. 10",
+      "ar": "مثال: 10"
+    },
+    "generate_button": {
+      "en": "Generate QR Codes",
+      "fr": "Générer les codes QR",
+      "ar": "إنشاء رموز QR"
+    },
+    "generating": {
+      "en": "Generating...",
+      "fr": "Génération en cours...",
+      "ar": "جارٍ الإنشاء..."
+    },
+    "replace_warning": {
+      "en": "Note: This will replace your existing {{count}} table.",
+      "en_plural": "Note: This will replace your existing {{count}} tables.",
+      "fr": "Note : Cela remplacera votre {{count}} table existante.",
+      "fr_plural": "Note : Cela remplacera vos {{count}} tables existantes.",
+      "ar": "ملاحظة: سيؤدي هذا إلى استبدال طاولتك الحالية ({{count}}).",
+      "ar_plural": "ملاحظة: سيؤدي هذا إلى استبدال طاولاتك الحالية ({{count}})."
+    },
+    "your_tables": {
+      "en": "Your Tables ({{count}})",
+      "fr": "Vos tables ({{count}})",
+      "ar": "طاولاتك ({{count}})"
+    },
+    "download_all": {
+      "en": "Download All",
+      "fr": "Tout télécharger",
+      "ar": "تحميل الكل"
+    },
+    "download_qr": {
+      "en": "Download QR",
+      "fr": "Télécharger QR",
+      "ar": "تحميل QR"
+    },
+    "empty": {
+      "en": "No tables generated yet. Use the form above to create QR codes for your tables.",
+      "fr": "Aucune table générée. Utilisez le formulaire ci-dessus pour créer des codes QR pour vos tables.",
+      "ar": "لم يتم إنشاء طاولات بعد. استخدم النموذج أعلاه لإنشاء رموز QR لطاولاتك."
+    }
+  },
+  "settings": {
+    "title": {
+      "en": "Settings",
+      "fr": "Paramètres",
+      "ar": "الإعدادات"
+    },
+    "subtitle": {
+      "en": "Manage your account and business settings",
+      "fr": "Gérez vos paramètres de compte et d'établissement",
+      "ar": "إدارة إعدادات حسابك ومؤسستك"
+    },
+    "business_info": {
+      "en": "Business Information",
+      "fr": "Informations sur l'établissement",
+      "ar": "معلومات المؤسسة"
+    },
+    "business_name": {
+      "en": "Business Name",
+      "fr": "Nom de l'établissement",
+      "ar": "اسم المؤسسة"
+    },
+    "business_name_placeholder": {
+      "en": "Enter your business name",
+      "fr": "Entrez le nom de votre établissement",
+      "ar": "أدخل اسم مؤسستك"
+    },
+    "save_changes": {
+      "en": "Save Changes",
+      "fr": "Enregistrer",
+      "ar": "حفظ التغييرات"
+    },
+    "saving": {
+      "en": "Saving...",
+      "fr": "Enregistrement...",
+      "ar": "جارٍ الحفظ..."
+    },
+    "account_info": {
+      "en": "Account Information",
+      "fr": "Informations du compte",
+      "ar": "معلومات الحساب"
+    },
+    "email": {
+      "en": "Email Address",
+      "fr": "Adresse e-mail",
+      "ar": "عنوان البريد الإلكتروني"
+    },
+    "email_readonly": {
+      "en": "Email cannot be changed",
+      "fr": "L'e-mail ne peut pas être modifié",
+      "ar": "لا يمكن تغيير البريد الإلكتروني"
+    },
+    "account_id": {
+      "en": "Account ID",
+      "fr": "ID du compte",
+      "ar": "معرف الحساب"
+    },
+    "account_id_info": {
+      "en": "Used for API integrations",
+      "fr": "Utilisé pour les intégrations API",
+      "ar": "يُستخدم لتكاملات API"
+    },
+    "dashboard_logo": {
+      "en": "Dashboard Logo",
+      "fr": "Logo du tableau de bord",
+      "ar": "شعار لوحة التحكم"
+    },
+    "upload_logo": {
+      "en": "Click to upload logo",
+      "fr": "Cliquez pour télécharger le logo",
+      "ar": "انقر لتحميل الشعار"
+    },
+    "logo_formats": {
+      "en": "PNG, JPG, SVG up to 2MB",
+      "fr": "PNG, JPG, SVG jusqu'à 2Mo",
+      "ar": "PNG، JPG، SVG حتى 2 ميجابايت"
+    },
+    "logo_updated": {
+      "en": "Logo updated successfully",
+      "fr": "Logo mis à jour avec succès",
+      "ar": "تم تحديث الشعار بنجاح"
+    },
+    "logo_removed": {
+      "en": "Logo removed",
+      "fr": "Logo supprimé",
+      "ar": "تم إزالة الشعار"
+    },
+    "remove": {
+      "en": "Remove",
+      "fr": "Supprimer",
+      "ar": "إزالة"
+    },
+    "uploading": {
+      "en": "Uploading...",
+      "fr": "Téléchargement...",
+      "ar": "جارٍ التحميل..."
+    },
+    "name_saved": {
+      "en": "Business name updated successfully!",
+      "fr": "Nom de l'établissement mis à jour avec succès !",
+      "ar": "تم تحديث اسم المؤسسة بنجاح!"
+    }
+  },
+  "survey": {
+    "header": {
+      "en": "How was your experience?",
+      "fr": "Comment s'est passée votre expérience ?",
+      "ar": "كيف كانت تجربتك؟"
+    },
+    "table": {
+      "en": "Table {{number}}",
+      "fr": "Table {{number}}",
+      "ar": "الطاولة {{number}}"
+    },
+    "rate_experience": {
+      "en": "Rate your experience",
+      "fr": "Évaluez votre expérience",
+      "ar": "قيّم تجربتك"
+    },
+    "comment_placeholder": {
+      "en": "Tell us more (optional)",
+      "fr": "Dites-nous en plus (facultatif)",
+      "ar": "أخبرنا بالمزيد (اختياري)"
+    },
+    "add_photo": {
+      "en": "Add a photo (optional)",
+      "fr": "Ajouter une photo (facultatif)",
+      "ar": "أضف صورة (اختياري)"
+    },
+    "preview": {
+      "en": "Preview",
+      "fr": "Aperçu",
+      "ar": "معاينة"
+    },
+    "submit": {
+      "en": "Send Feedback",
+      "fr": "Envoyer",
+      "ar": "إرسال التعليق"
+    },
+    "sending": {
+      "en": "Sending...",
+      "fr": "Envoi en cours...",
+      "ar": "جارٍ الإرسال..."
+    },
+    "thank_you": {
+      "en": "Thank you!",
+      "fr": "Merci !",
+      "ar": "شكراً لك!"
+    },
+    "feedback_helps": {
+      "en": "Your feedback helps us improve.",
+      "fr": "Vos retours nous aident à nous améliorer.",
+      "ar": "تساعدنا ملاحظاتك على التحسن."
+    },
+    "already_submitted": {
+      "en": "Feedback already submitted",
+      "fr": "Avis déjà envoyé",
+      "ar": "تم إرسال التعليق بالفعل"
+    },
+    "once_per_visit": {
+      "en": "You can only review once per visit.",
+      "fr": "Vous ne pouvez laisser qu'un seul avis par visite.",
+      "ar": "يمكنك التقييم مرة واحدة فقط لكل زيارة."
+    },
+    "rating_required": {
+      "en": "Please select a rating",
+      "fr": "Veuillez sélectionner une note",
+      "ar": "يرجى اختيار تقييم"
+    },
+    "invalid_link": {
+      "en": "Invalid Survey Link",
+      "fr": "Lien de sondage invalide",
+      "ar": "رابط الاستبيان غير صالح"
+    },
+    "scan_valid_qr": {
+      "en": "Please scan a valid QR code to submit feedback.",
+      "fr": "Veuillez scanner un code QR valide pour envoyer votre avis.",
+      "ar": "يرجى مسح رمز QR صالح لإرسال تعليقك."
+    },
+    "error": {
+      "en": "Something went wrong. Please try again.",
+      "fr": "Une erreur s'est produite. Veuillez réessayer.",
+      "ar": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
+    }
+  },
+  "common": {
+    "loading": {
+      "en": "Loading...",
+      "fr": "Chargement...",
+      "ar": "جارٍ التحميل..."
+    },
+    "error": {
+      "en": "Error",
+      "fr": "Erreur",
+      "ar": "خطأ"
+    },
+    "success": {
+      "en": "Success",
+      "fr": "Succès",
+      "ar": "نجاح"
+    },
+    "cancel": {
+      "en": "Cancel",
+      "fr": "Annuler",
+      "ar": "إلغاء"
+    },
+    "save": {
+      "en": "Save",
+      "fr": "Enregistrer",
+      "ar": "حفظ"
+    },
+    "delete": {
+      "en": "Delete",
+      "fr": "Supprimer",
+      "ar": "حذف"
+    },
+    "edit": {
+      "en": "Edit",
+      "fr": "Modifier",
+      "ar": "تعديل"
+    },
+    "close": {
+      "en": "Close",
+      "fr": "Fermer",
+      "ar": "إغلاق"
+    }
+  },
+  "dashboard": {
+    "login": {
+      "title": {
+        "en": "Welcome back",
+        "fr": "Bon retour",
+        "ar": "مرحباً بعودتك"
+      },
+      "subtitle": {
+        "en": "Sign in to your dashboard",
+        "fr": "Connectez-vous à votre tableau de bord",
+        "ar": "تسجيل الدخول إلى لوحة التحكم"
+      },
+      "email": {
+        "en": "Email",
+        "fr": "E-mail",
+        "ar": "البريد الإلكتروني"
+      },
+      "email_placeholder": {
+        "en": "you@example.com",
+        "fr": "vous@exemple.com",
+        "ar": "you@example.com"
+      },
+      "password": {
+        "en": "Password",
+        "fr": "Mot de passe",
+        "ar": "كلمة المرور"
+      },
+      "password_placeholder": {
+        "en": "Enter your password",
+        "fr": "Entrez votre mot de passe",
+        "ar": "أدخل كلمة المرور"
+      },
+      "submit": {
+        "en": "Sign In",
+        "fr": "Se connecter",
+        "ar": "تسجيل الدخول"
+      },
+      "signing_in": {
+        "en": "Signing in...",
+        "fr": "Connexion en cours...",
+        "ar": "جارٍ تسجيل الدخول..."
+      },
+      "forgot_password": {
+        "en": "Forgot password?",
+        "fr": "Mot de passe oublié ?",
+        "ar": "نسيت كلمة المرور؟"
+      },
+      "no_account": {
+        "en": "Don't have an account?",
+        "fr": "Vous n'avez pas de compte ?",
+        "ar": "ليس لديك حساب؟"
+      },
+      "signup_link": {
+        "en": "Sign up",
+        "fr": "S'inscrire",
+        "ar": "إنشاء حساب"
+      }
+    },
+    "signup": {
+      "title": {
+        "en": "Create your account",
+        "fr": "Créez votre compte",
+        "ar": "أنشئ حسابك"
+      },
+      "subtitle": {
+        "en": "Start collecting customer feedback today",
+        "fr": "Commencez à collecter les avis clients dès aujourd'hui",
+        "ar": "ابدأ في جمع ملاحظات العملاء اليوم"
+      },
+      "business_name": {
+        "en": "Business Name",
+        "fr": "Nom de l'établissement",
+        "ar": "اسم المؤسسة"
+      },
+      "business_placeholder": {
+        "en": "e.g. Joe's Restaurant",
+        "fr": "ex. Restaurant Chez Joe",
+        "ar": "مثال: مطعم جو"
+      },
+      "password_placeholder": {
+        "en": "Create a password (min. 6 characters)",
+        "fr": "Créez un mot de passe (min. 6 caractères)",
+        "ar": "أنشئ كلمة مرور (6 أحرف على الأقل)"
+      },
+      "submit": {
+        "en": "Create Account",
+        "fr": "Créer un compte",
+        "ar": "إنشاء حساب"
+      },
+      "creating": {
+        "en": "Creating account...",
+        "fr": "Création du compte...",
+        "ar": "جارٍ إنشاء الحساب..."
+      },
+      "have_account": {
+        "en": "Already have an account?",
+        "fr": "Vous avez déjà un compte ?",
+        "ar": "لديك حساب بالفعل؟"
+      },
+      "login_link": {
+        "en": "Sign in",
+        "fr": "Se connecter",
+        "ar": "تسجيل الدخول"
+      },
+      "check_email": {
+        "en": "Please check your email to confirm your account, then log in.",
+        "fr": "Veuillez vérifier votre e-mail pour confirmer votre compte, puis connectez-vous.",
+        "ar": "يرجى التحقق من بريدك الإلكتروني لتأكيد حسابك، ثم قم بتسجيل الدخول."
+      }
+    },
+    "sidebar": {
+      "dashboard": {
+        "en": "Dashboard",
+        "fr": "Tableau de bord",
+        "ar": "لوحة التحكم"
+      },
+      "feedback": {
+        "en": "Feedback",
+        "fr": "Commentaires",
+        "ar": "التعليقات"
+      },
+      "tables": {
+        "en": "Tables",
+        "fr": "Tables",
+        "ar": "الطاولات"
+      },
+      "alerts": {
+        "en": "Alerts",
+        "fr": "Alertes",
+        "ar": "التنبيهات"
+      },
+      "settings": {
+        "en": "Settings",
+        "fr": "Paramètres",
+        "ar": "الإعدادات"
+      },
+      "branding": {
+        "en": "Branding",
+        "fr": "Personnalisation",
+        "ar": "العلامة التجارية"
+      },
+      "logout": {
+        "en": "Logout",
+        "fr": "Se déconnecter",
+        "ar": "تسجيل الخروج"
+      }
+    },
+    "overview": {
+      "title": {
+        "en": "Overview",
+        "fr": "Aperçu",
+        "ar": "نظرة عامة"
+      },
+      "subtitle": {
+        "en": "Welcome back! Here's what's happening today.",
+        "fr": "Bon retour ! Voici ce qui se passe aujourd'hui.",
+        "ar": "مرحباً بعودتك! إليك ما يحدث اليوم."
+      },
+      "today_score": {
+        "en": "Today's Score",
+        "fr": "Note du jour",
+        "ar": "تقييم اليوم"
+      },
+      "based_on": {
+        "en": "Based on {{count}} reviews",
+        "fr": "Basé sur {{count}} avis",
+        "ar": "بناءً على {{count}} تقييمات"
+      },
+      "new_feedback": {
+        "en": "New Feedback",
+        "fr": "Nouveaux commentaires",
+        "ar": "تعليقات جديدة"
+      },
+      "received_today": {
+        "en": "Received today",
+        "fr": "Reçus aujourd'hui",
+        "ar": "تم استلامها اليوم"
+      },
+      "alerts_triggered": {
+        "en": "Alerts Triggered",
+        "fr": "Alertes déclenchées",
+        "ar": "التنبيهات المُطلقة"
+      },
+      "need_attention": {
+        "en": "Need attention",
+        "fr": "Nécessitent attention",
+        "ar": "تحتاج اهتمام"
+      }
+    },
+    "recent": {
+      "title": {
+        "en": "Recent Feedback",
+        "fr": "Commentaires récents",
+        "ar": "التعليقات الأخيرة"
+      },
+      "view_all": {
+        "en": "View all",
+        "fr": "Voir tout",
+        "ar": "عرض الكل"
+      },
+      "empty": {
+        "en": "No feedback yet. Share your QR codes to start collecting feedback!",
+        "fr": "Pas encore de commentaires. Partagez vos codes QR pour commencer à collecter des avis !",
+        "ar": "لا توجد تعليقات بعد. شارك رموز QR لبدء جمع التعليقات!"
+      },
+      "no_comment": {
+        "en": "No comment provided",
+        "fr": "Aucun commentaire fourni",
+        "ar": "لم يتم تقديم تعليق"
+      }
+    },
+    "modal": {
+      "title": {
+        "en": "Feedback Details",
+        "fr": "Détails du commentaire",
+        "ar": "تفاصيل التعليق"
+      },
+      "rating": {
+        "en": "Rating",
+        "fr": "Note",
+        "ar": "التقييم"
+      },
+      "table": {
+        "en": "Table",
+        "fr": "Table",
+        "ar": "الطاولة"
+      },
+      "location": {
+        "en": "Location",
+        "fr": "Emplacement",
+        "ar": "الموقع"
+      },
+      "comment": {
+        "en": "Comment",
+        "fr": "Commentaire",
+        "ar": "التعليق"
+      },
+      "time": {
+        "en": "Time",
+        "fr": "Heure",
+        "ar": "الوقت"
+      },
+      "not_specified": {
+        "en": "Not specified",
+        "fr": "Non spécifié",
+        "ar": "غير محدد"
+      }
+    },
+    "feedback_page": {
+      "title": {
+        "en": "All Feedback",
+        "fr": "Tous les commentaires",
+        "ar": "جميع التعليقات"
+      },
+      "total_responses": {
+        "en": "{{count}} total response",
+        "en_plural": "{{count}} total responses",
+        "fr": "{{count}} réponse au total",
+        "fr_plural": "{{count}} réponses au total",
+        "ar": "{{count}} رد إجمالي",
+        "ar_plural": "{{count}} ردود إجمالية"
+      },
+      "filter_all": {
+        "en": "All",
+        "fr": "Tous",
+        "ar": "الكل"
+      },
+      "filter_positive": {
+        "en": "Positive",
+        "fr": "Positifs",
+        "ar": "إيجابي"
+      },
+      "filter_negative": {
+        "en": "Negative",
+        "fr": "Négatifs",
+        "ar": "سلبي"
+      },
+      "filter_with_image": {
+        "en": "With Image",
+        "fr": "Avec photo",
+        "ar": "مع صورة"
+      },
+      "no_feedback_filter": {
+        "en": "No feedback found matching your filter.",
+        "fr": "Aucun commentaire ne correspond à votre filtre.",
+        "ar": "لم يتم العثور على تعليقات تطابق الفلتر."
+      }
+    },
+    "tables_page": {
+      "title": {
+        "en": "Tables Management",
+        "fr": "Gestion des tables",
+        "ar": "إدارة الطاولات"
+      },
+      "subtitle": {
+        "en": "Generate and manage QR codes for your restaurant tables.",
+        "fr": "Générez et gérez les codes QR pour les tables de votre restaurant.",
+        "ar": "إنشاء وإدارة رموز QR لطاولات مطعمك."
+      },
+      "generate_title": {
+        "en": "Generate Tables",
+        "fr": "Générer des tables",
+        "ar": "إنشاء طاولات"
+      },
+      "generate_description": {
+        "en": "Enter the number of tables in your restaurant. Each table will get a unique QR code that customers can scan to leave feedback.",
+        "fr": "Entrez le nombre de tables dans votre restaurant. Chaque table recevra un code QR unique que les clients peuvent scanner pour laisser un avis.",
+        "ar": "أدخل عدد الطاولات في مطعمك. ستحصل كل طاولة على رمز QR فريد يمكن للعملاء مسحه لترك تعليق."
+      },
+      "how_many_tables": {
+        "en": "Number of Tables",
+        "fr": "Nombre de tables",
+        "ar": "عدد الطاولات"
+      },
+      "generate_button": {
+        "en": "Generate QR Codes",
+        "fr": "Générer les codes QR",
+        "ar": "إنشاء رموز QR"
+      },
+      "generating": {
+        "en": "Generating...",
+        "fr": "Génération en cours...",
+        "ar": "جارٍ الإنشاء..."
+      },
+      "replace_warning": {
+        "en": "Note: This will replace your existing {{count}} table.",
+        "en_plural": "Note: This will replace your existing {{count}} tables.",
+        "fr": "Note : Cela remplacera votre {{count}} table existante.",
+        "fr_plural": "Note : Cela remplacera vos {{count}} tables existantes.",
+        "ar": "ملاحظة: سيؤدي هذا إلى استبدال طاولتك الحالية ({{count}}).",
+        "ar_plural": "ملاحظة: سيؤدي هذا إلى استبدال طاولاتك الحالية ({{count}})."
+      },
+      "your_tables": {
+        "en": "Your Tables ({{count}})",
+        "fr": "Vos tables ({{count}})",
+        "ar": "طاولاتك ({{count}})"
+      },
+      "download_all": {
+        "en": "Download All",
+        "fr": "Tout télécharger",
+        "ar": "تحميل الكل"
+      },
+      "download_qr": {
+        "en": "Download QR",
+        "fr": "Télécharger QR",
+        "ar": "تحميل QR"
+      },
+      "table_number": {
+        "en": "Table {{number}}",
+        "fr": "Table {{number}}",
+        "ar": "طاولة {{number}}"
+      },
+      "no_tables": {
+        "en": "No tables generated yet. Use the form above to create QR codes for your tables.",
+        "fr": "Aucune table générée. Utilisez le formulaire ci-dessus pour créer des codes QR pour vos tables.",
+        "ar": "لم يتم إنشاء طاولات بعد. استخدم النموذج أعلاه لإنشاء رموز QR لطاولاتك."
+      }
+    },
+    "alerts_page": {
+      "title": {
+        "en": "Alerts",
+        "fr": "Alertes",
+        "ar": "التنبيهات"
+      },
+      "subtitle": {
+        "en": "{{count}} alert needs attention",
+        "en_plural": "{{count}} alerts need attention",
+        "fr": "{{count}} alerte nécessite attention",
+        "fr_plural": "{{count}} alertes nécessitent attention",
+        "ar": "{{count}} تنبيه يحتاج اهتمام",
+        "ar_plural": "{{count}} تنبيهات تحتاج اهتمام"
+      },
+      "issues_requiring_attention": {
+        "en": "Issues Requiring Attention",
+        "fr": "Problèmes nécessitant attention",
+        "ar": "مشاكل تتطلب الاهتمام"
+      },
+      "low_rating": {
+        "en": "Low rating",
+        "fr": "Note basse",
+        "ar": "تقييم منخفض"
+      },
+      "contains_keyword": {
+        "en": "Contains negative word: \"{{keyword}}\"",
+        "fr": "Contient un mot négatif : \"{{keyword}}\"",
+        "ar": "يحتوي على كلمة سلبية: \"{{keyword}}\""
+      },
+      "mark_resolved": {
+        "en": "Mark Resolved",
+        "fr": "Marquer comme résolu",
+        "ar": "وضع علامة تم الحل"
+      },
+      "view_details": {
+        "en": "View Details",
+        "fr": "Voir les détails",
+        "ar": "عرض التفاصيل"
+      },
+      "all_clear": {
+        "en": "All Clear!",
+        "fr": "Tout est en ordre !",
+        "ar": "كل شيء على ما يرام!"
+      },
+      "no_alerts": {
+        "en": "No alerts at the moment. Keep up the great work!",
+        "fr": "Aucune alerte pour le moment. Continuez votre excellent travail !",
+        "ar": "لا توجد تنبيهات في الوقت الحالي. استمر في العمل الرائع!"
+      }
+    },
+    "settings_page": {
+      "title": {
+        "en": "Settings",
+        "fr": "Paramètres",
+        "ar": "الإعدادات"
+      },
+      "subtitle": {
+        "en": "Manage your account and business settings",
+        "fr": "Gérez vos paramètres de compte et d'établissement",
+        "ar": "إدارة إعدادات حسابك ومؤسستك"
+      },
+      "business_info": {
+        "en": "Business Information",
+        "fr": "Informations sur l'établissement",
+        "ar": "معلومات المؤسسة"
+      },
+      "business_name": {
+        "en": "Business Name",
+        "fr": "Nom de l'établissement",
+        "ar": "اسم المؤسسة"
+      },
+      "save_changes": {
+        "en": "Save Changes",
+        "fr": "Enregistrer",
+        "ar": "حفظ التغييرات"
+      },
+      "saving": {
+        "en": "Saving...",
+        "fr": "Enregistrement...",
+        "ar": "جارٍ الحفظ..."
+      },
+      "saved": {
+        "en": "Business name updated successfully!",
+        "fr": "Nom de l'établissement mis à jour avec succès !",
+        "ar": "تم تحديث اسم المؤسسة بنجاح!"
+      },
+      "account_info": {
+        "en": "Account Information",
+        "fr": "Informations du compte",
+        "ar": "معلومات الحساب"
+      },
+      "email": {
+        "en": "Email Address",
+        "fr": "Adresse e-mail",
+        "ar": "عنوان البريد الإلكتروني"
+      },
+      "email_note": {
+        "en": "Email cannot be changed",
+        "fr": "L'e-mail ne peut pas être modifié",
+        "ar": "لا يمكن تغيير البريد الإلكتروني"
+      },
+      "account_id": {
+        "en": "Account ID",
+        "fr": "ID du compte",
+        "ar": "معرف الحساب"
+      },
+      "account_id_note": {
+        "en": "Used for API integrations",
+        "fr": "Utilisé pour les intégrations API",
+        "ar": "يُستخدم لتكاملات API"
+      },
+      "language": {
+        "en": "Language",
+        "fr": "Langue",
+        "ar": "اللغة"
+      }
+    },
+    "feedback_modal": {
+      "title": {
+        "en": "Feedback Details",
+        "fr": "Détails du commentaire",
+        "ar": "تفاصيل التعليق"
+      },
+      "alert_title": {
+        "en": "Alert Details",
+        "fr": "Détails de l'alerte",
+        "ar": "تفاصيل التنبيه"
+      },
+      "rating": {
+        "en": "Rating",
+        "fr": "Note",
+        "ar": "التقييم"
+      },
+      "table": {
+        "en": "Table",
+        "fr": "Table",
+        "ar": "الطاولة"
+      },
+      "location": {
+        "en": "Location",
+        "fr": "Emplacement",
+        "ar": "الموقع"
+      },
+      "not_specified": {
+        "en": "Not specified",
+        "fr": "Non spécifié",
+        "ar": "غير محدد"
+      },
+      "comment": {
+        "en": "Comment",
+        "fr": "Commentaire",
+        "ar": "التعليق"
+      },
+      "time": {
+        "en": "Time",
+        "fr": "Heure",
+        "ar": "الوقت"
+      },
+      "alert_reason": {
+        "en": "Alert Reason",
+        "fr": "Raison de l'alerte",
+        "ar": "سبب التنبيه"
+      }
+    },
+    "time": {
+      "just_now": {
+        "en": "Just now",
+        "fr": "À l'instant",
+        "ar": "الآن"
+      },
+      "minutes_ago": {
+        "en": "{{count}} min ago",
+        "fr": "Il y a {{count}} min",
+        "ar": "منذ {{count}} دقيقة"
+      },
+      "hours_ago": {
+        "en": "{{count}} hour ago",
+        "en_plural": "{{count}} hours ago",
+        "fr": "Il y a {{count}} heure",
+        "fr_plural": "Il y a {{count}} heures",
+        "ar": "منذ {{count}} ساعة",
+        "ar_plural": "منذ {{count}} ساعات"
+      }
+    }
+  }
+}

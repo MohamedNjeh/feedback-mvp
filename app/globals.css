@@ -2,25 +2,63 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #222222;
+  --text-primary: #222222;
+  --text-secondary: #6B6B6B;
+  --text-muted: #8B8B8B;
+  --border-color: #E0E0E0;
+  --border-light: #E4E4E4;
+  --primary: #2A6EF0;
+  --primary-hover: #1A5ED0;
+  --danger: #FF4D4F;
+  --success: #10B981;
+  --card-bg: #FAFAFA;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-inter), sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  font-family: inherit;
+}
+
+input, textarea {
+  font-family: inherit;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .sidebar {
+  left: auto;
+  right: 0;
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+[dir="rtl"] .mainContent {
+  margin-left: 0;
+  margin-right: 240px;
+}
+
+@media (max-width: 768px) {
+  [dir="rtl"] .mainContent {
+    margin-right: 0;
+  }
+}
+

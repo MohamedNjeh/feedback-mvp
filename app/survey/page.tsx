@@ -151,6 +151,160 @@ function StatusScreen({ icon, title, subtitle, isError }: StatusScreenProps) {
 }
 
 // ─────────────────────────────────────────────────────────────
+// Form Section Components
+// ─────────────────────────────────────────────────────────────
+
+interface RatingSectionProps {
+  rating: number
+  setRating: (value: number) => void
+  showEmojis: boolean
+  bodySize: number | string
+  glassEnabled: boolean
+  getRatingButtonStyle: (isSelected: boolean) => React.CSSProperties
+  getNumberButtonStyle: (isSelected: boolean) => React.CSSProperties
+  t: (key: string) => string
+}
+
+function RatingSection({ 
+  rating, setRating, showEmojis, bodySize, glassEnabled, 
+  getRatingButtonStyle, getNumberButtonStyle, t 
+}: RatingSectionProps) {
+  return (
+    <fieldset className={styles.section}>
+      <legend 
+        className={styles.label}
+        style={{ 
+          fontSize: bodySize,
+          color: glassEnabled ? 'rgba(255, 255, 255, 0.9)' : 'var(--text-primary)',
+        }}
+      >
+        {t('survey.rate_experience')}
+      </legend>
+      {showEmojis ? (
+        <div className={styles.emojiContainer} role="radiogroup" aria-label="Rating selection">
+          {RATING_OPTIONS.map(({ value, emoji, label }) => (
+            <button
+              type="button"
+              key={value}
+              onClick={() => setRating(value)}
+              className={`${styles.emojiButton} ${rating === value ? styles.emojiButtonActive : ''}`}
+              role="radio"
+              aria-checked={rating === value}
+              aria-label={`${label} - ${value} out of 5`}
+              style={getRatingButtonStyle(rating === value)}
+            >
+              <span className={styles.emoji} aria-hidden="true">{emoji}</span>
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className={styles.ratingButtons} role="radiogroup" aria-label="Rating selection">
+          {[1, 2, 3, 4, 5].map((n) => (
+            <button
+              type="button"
+              key={n}
+              onClick={() => setRating(n)}
+              className={`${styles.ratingButton} ${rating === n ? styles.ratingButtonActive : ''}`}
+              role="radio"
+              aria-checked={rating === n}
+              aria-label={`${n} out of 5`}
+              style={getNumberButtonStyle(rating === n)}
+            >
+              {n}
+            </button>
+          ))}
+        </div>
+      )}
+    </fieldset>
+  )
+}
+
+interface ImageUploadProps {
+  imagePreview: string | null
+  onImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onRemove: () => void
+  t: (key: string) => string
+}
+
+function ImageUpload({ imagePreview, onImageChange, onRemove, t }: ImageUploadProps) {
+  if (imagePreview) {
+    return (
+      <div className={styles.imagePreviewContainer}>
+        <img src={imagePreview} alt={t('survey.preview')} className={styles.imagePreview} />
+        <button type="button" onClick={onRemove} className={styles.removeImageButton} aria-label="Remove uploaded image">
+          ✕
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <label className={styles.uploadCard}>
+      <input type="file" accept="image/*" onChange={onImageChange} className={styles.fileInput} aria-label={t('survey.add_photo')} />
+      <svg className={styles.cameraIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+        <circle cx="12" cy="13" r="4" />
+      </svg>
+      <span className={styles.uploadText}>{t('survey.add_photo')}</span>
+    </label>
+  )
+}
+
+interface SurveyHeaderProps {
+  branding: BrandingConfig
+  businessName: string | null
+  glassEnabled: boolean
+  derivedStyles: { fontWeight: number; logoSize: number; logoRadius: string }
+  table: string
+  t: (key: string, params?: Record<string, string | number>) => string
+}
+
+function SurveyHeader({ branding, businessName, glassEnabled, derivedStyles, table, t }: SurveyHeaderProps) {
+  const isCentered = branding.layout.headerStyle === 'centered'
+  
+  return (
+    <header 
+      className={styles.header}
+      style={{ 
+        textAlign: isCentered ? 'center' : 'left',
+        alignItems: isCentered ? 'center' : 'flex-start',
+      }}
+    >
+      <Logo 
+        url={branding.logoUrl}
+        name={businessName}
+        size={derivedStyles.logoSize}
+        radius={derivedStyles.logoRadius}
+      />
+      
+      {branding.custom.slogan && (
+        <p 
+          className={styles.slogan}
+          style={{ 
+            fontSize: branding.typography.subtitleSize,
+            color: glassEnabled ? 'rgba(255, 255, 255, 0.8)' : branding.colors.secondary,
+          }}
+        >
+          {branding.custom.slogan}
+        </p>
+      )}
+      
+      <h1 
+        className={styles.title}
+        style={{
+          fontSize: branding.typography.titleSize,
+          fontWeight: derivedStyles.fontWeight,
+          color: glassEnabled ? 'rgba(255, 255, 255, 0.95)' : branding.colors.primary,
+        }}
+      >
+        {t('survey.header')}
+      </h1>
+      <span className={styles.tableTag}>{t('survey.table', { number: table })}</span>
+    </header>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────
 // Main Survey Form Component
 // ─────────────────────────────────────────────────────────────
 
@@ -335,109 +489,32 @@ function SurveyForm() {
           className={glassEnabled ? styles.glassCard : styles.solidCard}
           style={glassEnabled ? { background: derivedStyles.cardBg } : undefined}
         >
-          {/* Language Switcher */}
-          <LanguageSwitcher 
-            className={styles.languageSwitcher} 
-            activeColor={branding.custom.languageSwitcherColor}
-          />
+          <LanguageSwitcher className={styles.languageSwitcher} activeColor={branding.custom.languageSwitcherColor} />
           
-          {/* Header */}
-          <header 
-            className={styles.header}
-            style={{ 
-              textAlign: branding.layout.headerStyle === 'centered' ? 'center' : 'left',
-              alignItems: branding.layout.headerStyle === 'centered' ? 'center' : 'flex-start',
-            }}
-          >
-            {/* Logo */}
-            <Logo 
-              url={branding.logoUrl}
-              name={businessName}
-              size={derivedStyles.logoSize}
-              radius={derivedStyles.logoRadius}
-            />
-            
-            {/* Slogan */}
-            {branding.custom.slogan && (
-              <p 
-                className={styles.slogan}
-                style={{ 
-                  fontSize: branding.typography.subtitleSize,
-                  color: glassEnabled ? 'rgba(255, 255, 255, 0.8)' : branding.colors.secondary,
-                }}
-              >
-                {branding.custom.slogan}
-              </p>
-            )}
-            
-            <h1 
-              className={styles.title}
-              style={{
-                fontSize: branding.typography.titleSize,
-                fontWeight: derivedStyles.fontWeight,
-                color: glassEnabled ? 'rgba(255, 255, 255, 0.95)' : branding.colors.primary,
-              }}
-            >
-              {t('survey.header')}
-            </h1>
-            <span className={styles.tableTag}>{t('survey.table', { number: table || '' })}</span>
-          </header>
+          <SurveyHeader
+            branding={branding}
+            businessName={businessName}
+            glassEnabled={glassEnabled}
+            derivedStyles={derivedStyles}
+            table={table}
+            t={t}
+          />
 
           <form onSubmit={handleSubmit} className={styles.form} aria-label="Feedback form">
-            {/* Rating Section */}
-            <fieldset className={styles.section}>
-              <legend 
-                className={styles.label}
-                style={{ 
-                  fontSize: branding.typography.bodySize,
-                  color: glassEnabled ? 'rgba(255, 255, 255, 0.9)' : 'var(--text-primary)',
-                }}
-              >
-                {t('survey.rate_experience')}
-              </legend>
-              {branding.layout.showSentimentIcons && (
-                <div className={styles.emojiContainer} role="radiogroup" aria-label="Rating selection">
-                  {RATING_OPTIONS.map(({ value, emoji, label }) => (
-                    <button
-                      type="button"
-                      key={value}
-                      onClick={() => setRating(value)}
-                      className={`${styles.emojiButton} ${rating === value ? styles.emojiButtonActive : ''}`}
-                      role="radio"
-                      aria-checked={rating === value}
-                      aria-label={`${label} - ${value} out of 5`}
-                      style={getRatingButtonStyle(rating === value)}
-                    >
-                      <span className={styles.emoji} aria-hidden="true">{emoji}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-              {!branding.layout.showSentimentIcons && (
-                <div className={styles.ratingButtons} role="radiogroup" aria-label="Rating selection">
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <button
-                      type="button"
-                      key={n}
-                      onClick={() => setRating(n)}
-                      className={`${styles.ratingButton} ${rating === n ? styles.ratingButtonActive : ''}`}
-                      role="radio"
-                      aria-checked={rating === n}
-                      aria-label={`${n} out of 5`}
-                      style={getNumberButtonStyle(rating === n)}
-                    >
-                      {n}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </fieldset>
+            <RatingSection
+              rating={rating}
+              setRating={setRating}
+              showEmojis={branding.layout.showSentimentIcons}
+              bodySize={branding.typography.bodySize}
+              glassEnabled={glassEnabled}
+              getRatingButtonStyle={getRatingButtonStyle}
+              getNumberButtonStyle={getNumberButtonStyle}
+              t={t}
+            />
 
             {/* Comment Section */}
             <div className={styles.section}>
-              <label htmlFor="feedback-comment" className="sr-only">
-                {t('survey.comment_placeholder')}
-              </label>
+              <label htmlFor="feedback-comment" className="sr-only">{t('survey.comment_placeholder')}</label>
               <textarea
                 id="feedback-comment"
                 className={styles.textarea}
@@ -451,40 +528,16 @@ function SurveyForm() {
 
             {/* Image Upload Section */}
             <div className={styles.section}>
-              {!imagePreview ? (
-                <label className={styles.uploadCard}>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className={styles.fileInput}
-                    aria-label={t('survey.add_photo')}
-                  />
-                  <svg className={styles.cameraIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                    <circle cx="12" cy="13" r="4" />
-                  </svg>
-                  <span className={styles.uploadText}>{t('survey.add_photo')}</span>
-                </label>
-              ) : (
-                <div className={styles.imagePreviewContainer}>
-                  <img src={imagePreview} alt={t('survey.preview')} className={styles.imagePreview} />
-                  <button 
-                    type="button" 
-                    onClick={removeImage} 
-                    className={styles.removeImageButton}
-                    aria-label="Remove uploaded image"
-                  >
-                    ✕
-                  </button>
-                </div>
-              )}
+              <ImageUpload
+                imagePreview={imagePreview}
+                onImageChange={handleImageChange}
+                onRemove={removeImage}
+                t={t}
+              />
             </div>
 
-            {/* Error Message */}
             {error && <p className={styles.error} role="alert" aria-live="polite">{error}</p>}
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={uploading}

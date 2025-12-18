@@ -305,6 +305,176 @@ function SurveyHeader({ branding, businessName, glassEnabled, derivedStyles, tab
 }
 
 // ─────────────────────────────────────────────────────────────
+// Additional Form Components
+// ─────────────────────────────────────────────────────────────
+
+interface CommentSectionProps {
+  comment: string
+  setComment: (value: string) => void
+  t: (key: string) => string
+}
+
+function CommentSection({ comment, setComment, t }: CommentSectionProps) {
+  return (
+    <div className={styles.section}>
+      <label htmlFor="feedback-comment" className="sr-only">{t('survey.comment_placeholder')}</label>
+      <textarea
+        id="feedback-comment"
+        className={styles.textarea}
+        placeholder={t('survey.comment_placeholder')}
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+        rows={4}
+        aria-label="Additional comments"
+      />
+    </div>
+  )
+}
+
+interface SubmitButtonProps {
+  uploading: boolean
+  glassEnabled: boolean
+  buttonColor: string
+  buttonText?: string
+  bodySize: number | string
+  t: (key: string) => string
+}
+
+function SubmitButton({ uploading, glassEnabled, buttonColor, buttonText, bodySize, t }: SubmitButtonProps) {
+  const backgroundColor = glassEnabled ? hexToRgba(buttonColor, 0.85) : buttonColor
+  
+  return (
+    <button
+      type="submit"
+      disabled={uploading}
+      className={styles.submitButton}
+      style={{ fontSize: bodySize, backgroundColor }}
+      aria-busy={uploading}
+    >
+      {uploading ? t('survey.sending') : (buttonText || t('survey.submit'))}
+    </button>
+  )
+}
+
+interface SurveyLayoutProps {
+  glassEnabled: boolean
+  glassTint: string
+  accentColor: string
+  fontFamily: string
+  background: string
+  cardBg: string
+  children: React.ReactNode
+}
+
+function SurveyLayout({ glassEnabled, glassTint, accentColor, fontFamily, background, cardBg, children }: SurveyLayoutProps) {
+  return (
+    <div 
+      className={glassEnabled ? styles.container : styles.containerNoGlass}
+      style={{ fontFamily, background }}
+    >
+      {glassEnabled && <LiquidBlobs tint={glassTint} accent={accentColor} />}
+      <div className={styles.content}>
+        <div 
+          className={glassEnabled ? styles.glassCard : styles.solidCard}
+          style={glassEnabled ? { background: cardBg } : undefined}
+        >
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────
+// Custom Hooks
+// ─────────────────────────────────────────────────────────────
+
+function useSurveyData(businessId: string | null) {
+  const [businessName, setBusinessName] = useState<string | null>(null)
+  const [branding, setBranding] = useState<BrandingConfig>(DEFAULT_BRANDING)
+
+  useEffect(() => {
+    if (!businessId) return
+    
+    supabase
+      .from('businesses')
+      .select('name, branding')
+      .eq('id', businessId)
+      .single()
+      .then(({ data }) => {
+        if (data) {
+          setBusinessName(data.name)
+          if (data.branding) setBranding(mergeBranding(data.branding))
+        }
+      })
+  }, [businessId])
+
+  return { businessName, branding }
+}
+
+function useImageUpload() {
+  const [image, setImage] = useState<File | null>(null)
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
+
+  const handleImageChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setImage(file)
+    const reader = new FileReader()
+    reader.onloadend = () => setImagePreview(reader.result as string)
+    reader.readAsDataURL(file)
+  }, [])
+
+  const removeImage = useCallback(() => {
+    setImage(null)
+    setImagePreview(null)
+  }, [])
+
+  return { image, imagePreview, handleImageChange, removeImage }
+}
+
+// ─────────────────────────────────────────────────────────────
+// Style Factory Functions (pure, no conditionals in component)
+// ─────────────────────────────────────────────────────────────
+
+function createRatingButtonStyle(glassEnabled: boolean, ratingColor: string, accentColor: string) {
+  return (isSelected: boolean): React.CSSProperties => 
+    glassEnabled
+      ? { background: hexToRgba(ratingColor, isSelected ? 0.25 : 0.1), borderColor: hexToRgba(ratingColor, isSelected ? 0.5 : 0.2) }
+      : { borderColor: isSelected ? accentColor : 'transparent', backgroundColor: isSelected ? `${accentColor}15` : 'transparent' }
+}
+
+function createNumberButtonStyle(glassEnabled: boolean, ratingColor: string, primaryColor: string) {
+  return (isSelected: boolean): React.CSSProperties =>
+    glassEnabled
+      ? { backgroundColor: hexToRgba(ratingColor, isSelected ? 0.3 : 0.1), borderColor: hexToRgba(ratingColor, 0.3), color: 'rgba(255, 255, 255, 0.9)' }
+      : { backgroundColor: isSelected ? primaryColor : 'transparent', borderColor: primaryColor, color: isSelected ? '#fff' : primaryColor }
+}
+
+// ─────────────────────────────────────────────────────────────
+// Async Operations (extracted to reduce component complexity)
+// ─────────────────────────────────────────────────────────────
+
+async function uploadFeedbackImage(image: File): Promise<{ path: string | null; error: string | null }> {
+  const fileExt = image.name.split('.').pop()
+  const filePath = `feedback-images/${uuidv4()}.${fileExt}`
+  const { error } = await supabase.storage.from('feedback-images').upload(filePath, image)
+  return error ? { path: null, error: 'Error uploading image: ' + error.message } : { path: filePath, error: null }
+}
+
+async function submitFeedbackData(payload: {
+  table: number
+  business_id: string
+  location: string
+  rating: number
+  comment: string
+  image_path: string[] | null
+}): Promise<string | null> {
+  const { error } = await supabase.from('feedback').insert([payload])
+  return error ? 'Error submitting feedback: ' + error.message : null
+}
+
+// ─────────────────────────────────────────────────────────────
 // Main Survey Form Component
 // ─────────────────────────────────────────────────────────────
 
@@ -315,40 +485,18 @@ function SurveyForm() {
   const business = searchParams.get('business')
   const location = searchParams.get('location') || 'Default'
 
+  // Form state
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
-  const [image, setImage] = useState<File | null>(null)
-  const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
   const [uploading, setUploading] = useState(false)
-  const [businessName, setBusinessName] = useState<string | null>(null)
-  const [alreadySubmitted, setAlreadySubmitted] = useState(false)
-  const [branding, setBranding] = useState<BrandingConfig>(DEFAULT_BRANDING)
 
-  // Fetch business data on mount
-  useEffect(() => {
-    if (!business) return
-    
-    const fetchData = async () => {
-      const { data } = await supabase
-        .from('businesses')
-        .select('name, branding')
-        .eq('id', business)
-        .single()
-      
-      if (data) {
-        setBusinessName(data.name)
-        if (data.branding) {
-          setBranding(mergeBranding(data.branding))
-        }
-      }
-    }
-    
-    fetchData()
-  }, [business])
+  // Custom hooks
+  const { businessName, branding } = useSurveyData(business)
+  const { image, imagePreview, handleImageChange, removeImage } = useImageUpload()
 
-  // Memoized derived values
+  // Derived values
   const glassEnabled = branding.layout.glassEnabled ?? true
   const glassTint = branding.custom.glassCardTint || '#667eea'
   const ratingColor = branding.custom.ratingButtonColor || '#ffffff'
@@ -363,199 +511,104 @@ function SurveyForm() {
     cardBg: hexToRgba(glassTint, 0.15),
   }), [branding, glassEnabled, glassTint])
 
-  /** Get style for emoji/rating buttons based on glass mode and selection */
-  const getRatingButtonStyle = useCallback((isSelected: boolean) => {
-    if (glassEnabled) {
-      return {
-        background: hexToRgba(ratingColor, isSelected ? 0.25 : 0.1),
-        borderColor: hexToRgba(ratingColor, isSelected ? 0.5 : 0.2),
-      }
-    }
-    return {
-      borderColor: isSelected ? branding.colors.accent : 'transparent',
-      backgroundColor: isSelected ? `${branding.colors.accent}15` : 'transparent',
-    }
-  }, [glassEnabled, ratingColor, branding.colors.accent])
+  // Style getters (memoized factory functions)
+  const getRatingButtonStyle = useMemo(
+    () => createRatingButtonStyle(glassEnabled, ratingColor, branding.colors.accent),
+    [glassEnabled, ratingColor, branding.colors.accent]
+  )
+  const getNumberButtonStyle = useMemo(
+    () => createNumberButtonStyle(glassEnabled, ratingColor, branding.colors.primary),
+    [glassEnabled, ratingColor, branding.colors.primary]
+  )
 
-  /** Get style for number rating buttons */
-  const getNumberButtonStyle = useCallback((isSelected: boolean) => {
-    if (glassEnabled) {
-      return {
-        backgroundColor: hexToRgba(ratingColor, isSelected ? 0.3 : 0.1),
-        borderColor: hexToRgba(ratingColor, 0.3),
-        color: 'rgba(255, 255, 255, 0.9)',
-      }
-    }
-    return {
-      backgroundColor: isSelected ? branding.colors.primary : 'transparent',
-      borderColor: branding.colors.primary,
-      color: isSelected ? '#fff' : branding.colors.primary,
-    }
-  }, [glassEnabled, ratingColor, branding.colors.primary])
-
-  // Event handlers
-  const handleImageChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-    
-    setImage(file)
-    const reader = new FileReader()
-    reader.onloadend = () => setImagePreview(reader.result as string)
-    reader.readAsDataURL(file)
-  }, [])
-
-  const removeImage = useCallback(() => {
-    setImage(null)
-    setImagePreview(null)
-  }, [])
-
+  // Form submission handler
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
+
+    if (!table || !business) return setError(t('survey.invalid_link'))
+    if (rating === 0) return setError(t('survey.rating_required'))
+
     setUploading(true)
 
-    if (!table || !business) {
-      setError(t('survey.invalid_link'))
-      setUploading(false)
-      return
-    }
-
-    if (rating === 0) {
-      setError(t('survey.rating_required'))
-      setUploading(false)
-      return
-    }
-
+    // Handle image upload
     let imagePath: string | null = null
-
     if (image) {
-      const fileExt = image.name.split('.').pop()
-      const filePath = `feedback-images/${uuidv4()}.${fileExt}`
-
-      const { error: uploadError } = await supabase.storage
-        .from('feedback-images')
-        .upload(filePath, image)
-
-      if (uploadError) {
-        setError('Error uploading image: ' + uploadError.message)
+      const result = await uploadFeedbackImage(image)
+      if (result.error) {
+        setError(result.error)
         setUploading(false)
         return
       }
-      imagePath = filePath
+      imagePath = result.path
     }
 
-    const { error: submitError } = await supabase
-      .from('feedback')
-      .insert([{ 
-        table: parseInt(table), 
-        business_id: business,
-        location, 
-        rating, 
-        comment, 
-        image_path: imagePath ? [imagePath] : null 
-      }])
+    // Submit feedback
+    const submitError = await submitFeedbackData({
+      table: parseInt(table),
+      business_id: business,
+      location,
+      rating,
+      comment,
+      image_path: imagePath ? [imagePath] : null,
+    })
 
-    if (submitError) {
-      setError('Error submitting feedback: ' + submitError.message)
-    } else {
-      setSubmitted(true)
-    }
+    submitError ? setError(submitError) : setSubmitted(true)
     setUploading(false)
   }, [table, business, location, rating, comment, image, t])
 
-  // ─── Status Screens ───
+  // Status screens (early returns)
   if (!table || !business) {
     return <StatusScreen icon="⚠️" title={t('survey.invalid_link')} subtitle={t('survey.scan_valid_qr')} isError />
   }
-
-  if (alreadySubmitted) {
-    return <StatusScreen icon="🔒" title={t('survey.already_submitted')} subtitle={t('survey.once_per_visit')} />
-  }
-
   if (submitted) {
     return <StatusScreen icon="✓" title={branding.custom.thankYouMessage || t('survey.thank_you')} subtitle={t('survey.feedback_helps')} />
   }
 
-  // ─── Main Form ───
+  // Main form
   return (
-    <div 
-      className={glassEnabled ? styles.container : styles.containerNoGlass}
-      style={{ fontFamily: branding.typography.fontFamily, background: derivedStyles.background }}
+    <SurveyLayout
+      glassEnabled={glassEnabled}
+      glassTint={glassTint}
+      accentColor={branding.colors.accent}
+      fontFamily={branding.typography.fontFamily}
+      background={derivedStyles.background}
+      cardBg={derivedStyles.cardBg}
     >
-      {glassEnabled && <LiquidBlobs tint={glassTint} accent={branding.colors.accent} />}
+      <LanguageSwitcher className={styles.languageSwitcher} activeColor={branding.custom.languageSwitcherColor} />
       
-      <div className={styles.content}>
-        <div 
-          className={glassEnabled ? styles.glassCard : styles.solidCard}
-          style={glassEnabled ? { background: derivedStyles.cardBg } : undefined}
-        >
-          <LanguageSwitcher className={styles.languageSwitcher} activeColor={branding.custom.languageSwitcherColor} />
-          
-          <SurveyHeader
-            branding={branding}
-            businessName={businessName}
-            glassEnabled={glassEnabled}
-            derivedStyles={derivedStyles}
-            table={table}
-            t={t}
-          />
+      <SurveyHeader branding={branding} businessName={businessName} glassEnabled={glassEnabled} derivedStyles={derivedStyles} table={table} t={t} />
 
-          <form onSubmit={handleSubmit} className={styles.form} aria-label="Feedback form">
-            <RatingSection
-              rating={rating}
-              setRating={setRating}
-              showEmojis={branding.layout.showSentimentIcons}
-              bodySize={branding.typography.bodySize}
-              glassEnabled={glassEnabled}
-              getRatingButtonStyle={getRatingButtonStyle}
-              getNumberButtonStyle={getNumberButtonStyle}
-              t={t}
-            />
+      <form onSubmit={handleSubmit} className={styles.form} aria-label="Feedback form">
+        <RatingSection
+          rating={rating}
+          setRating={setRating}
+          showEmojis={branding.layout.showSentimentIcons}
+          bodySize={branding.typography.bodySize}
+          glassEnabled={glassEnabled}
+          getRatingButtonStyle={getRatingButtonStyle}
+          getNumberButtonStyle={getNumberButtonStyle}
+          t={t}
+        />
 
-            {/* Comment Section */}
-            <div className={styles.section}>
-              <label htmlFor="feedback-comment" className="sr-only">{t('survey.comment_placeholder')}</label>
-              <textarea
-                id="feedback-comment"
-                className={styles.textarea}
-                placeholder={t('survey.comment_placeholder')}
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                rows={4}
-                aria-label="Additional comments"
-              />
-            </div>
+        <CommentSection comment={comment} setComment={setComment} t={t} />
 
-            {/* Image Upload Section */}
-            <div className={styles.section}>
-              <ImageUpload
-                imagePreview={imagePreview}
-                onImageChange={handleImageChange}
-                onRemove={removeImage}
-                t={t}
-              />
-            </div>
-
-            {error && <p className={styles.error} role="alert" aria-live="polite">{error}</p>}
-
-            <button
-              type="submit"
-              disabled={uploading}
-              className={styles.submitButton}
-              style={{
-                fontSize: branding.typography.bodySize,
-                backgroundColor: glassEnabled 
-                  ? hexToRgba(branding.custom.ctaButtonColor || branding.colors.primary, 0.85)
-                  : branding.custom.ctaButtonColor || branding.colors.primary,
-              }}
-              aria-busy={uploading}
-            >
-              {uploading ? t('survey.sending') : (branding.custom.ctaButtonText || t('survey.submit'))}
-            </button>
-          </form>
+        <div className={styles.section}>
+          <ImageUpload imagePreview={imagePreview} onImageChange={handleImageChange} onRemove={removeImage} t={t} />
         </div>
-      </div>
-    </div>
+
+        {error && <p className={styles.error} role="alert" aria-live="polite">{error}</p>}
+
+        <SubmitButton
+          uploading={uploading}
+          glassEnabled={glassEnabled}
+          buttonColor={branding.custom.ctaButtonColor || branding.colors.primary}
+          buttonText={branding.custom.ctaButtonText}
+          bodySize={branding.typography.bodySize}
+          t={t}
+        />
+      </form>
+    </SurveyLayout>
   )
 }
 

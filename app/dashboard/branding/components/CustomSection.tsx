@@ -68,6 +68,24 @@ export function CustomSection({ branding, setBranding, t }: CustomSectionProps) 
         value={branding.custom.languageSwitcherColor || '#6B7280'}
         onChange={(value) => updateCustomField('languageSwitcherColor', value)}
       />
+
+      {/* Glass Effect Branding */}
+      <div className={styles.glassSection}>
+        <h4 className={styles.sectionSubtitle}>{t('branding.custom.glass_branding')}</h4>
+        <p className={styles.sectionHint}>{t('branding.custom.glass_branding_hint')}</p>
+
+        <ColorInput
+          label={t('branding.custom.glass_card_tint')}
+          value={branding.custom.glassCardTint || '#667eea'}
+          onChange={(value) => updateCustomField('glassCardTint', value)}
+        />
+
+        <ColorInput
+          label={t('branding.custom.rating_button_color')}
+          value={branding.custom.ratingButtonColor || '#ffffff'}
+          onChange={(value) => updateCustomField('ratingButtonColor', value)}
+        />
+      </div>
     </div>
   )
 }

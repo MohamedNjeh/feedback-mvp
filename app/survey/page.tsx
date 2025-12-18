@@ -1,12 +1,158 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, Suspense, useCallback, useMemo } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import { v4 as uuidv4 } from 'uuid'
 import { useI18n, LanguageSwitcher } from '@/lib/i18n'
 import { DEFAULT_BRANDING, type BrandingConfig } from '@/lib/types'
 import styles from './survey.module.css'
+
+// ─────────────────────────────────────────────────────────────
+// Utility Functions (outside component to avoid re-creation)
+// ─────────────────────────────────────────────────────────────
+
+/** Convert hex color to rgba string */
+const hexToRgba = (hex: string, alpha: number): string => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  if (!result) return `rgba(102, 126, 234, ${alpha})`
+  return `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}, ${alpha})`
+}
+
+/** Get font weight numeric value */
+const getFontWeight = (weight: string): number => {
+  const weights: Record<string, number> = { light: 300, normal: 400, bold: 700 }
+  return weights[weight] || 400
+}
+
+/** Get logo size in pixels */
+const getLogoSize = (size: string): number => {
+  const sizes: Record<string, number> = { small: 48, medium: 72, large: 96 }
+  return sizes[size] || 72
+}
+
+/** Get logo border radius */
+const getLogoRadius = (shape: string): string => {
+  const radii: Record<string, string> = { square: '0', circle: '50%', rounded: '12px' }
+  return radii[shape] || '12px'
+}
+
+/** Deep merge branding with defaults */
+const mergeBranding = (data: Partial<BrandingConfig>): BrandingConfig => ({
+  ...DEFAULT_BRANDING,
+  ...data,
+  colors: { ...DEFAULT_BRANDING.colors, ...data.colors },
+  typography: { ...DEFAULT_BRANDING.typography, ...data.typography },
+  layout: { ...DEFAULT_BRANDING.layout, ...data.layout },
+  custom: { ...DEFAULT_BRANDING.custom, ...data.custom },
+})
+
+/** Rating options for emoji selector */
+const RATING_OPTIONS = [
+  { value: 1, emoji: '😡', label: 'Very Dissatisfied' },
+  { value: 2, emoji: '😞', label: 'Dissatisfied' },
+  { value: 3, emoji: '😐', label: 'Neutral' },
+  { value: 4, emoji: '😊', label: 'Satisfied' },
+  { value: 5, emoji: '😍', label: 'Very Satisfied' },
+] as const
+
+// ─────────────────────────────────────────────────────────────
+// Reusable Components
+// ─────────────────────────────────────────────────────────────
+
+/** Liquid background blobs with optional custom colors */
+interface LiquidBlobsProps {
+  tint?: string
+  accent?: string
+}
+
+function LiquidBlobs({ tint = '#667eea', accent = '#764ba2' }: LiquidBlobsProps) {
+  return (
+    <>
+      <div 
+        className={`${styles.liquidBlob} ${styles.liquidBlob1}`} 
+        aria-hidden="true"
+        style={{ background: `linear-gradient(180deg, ${hexToRgba(tint, 0.8)} 0%, ${hexToRgba(accent, 0.6)} 100%)` }}
+      />
+      <div 
+        className={`${styles.liquidBlob} ${styles.liquidBlob2}`} 
+        aria-hidden="true"
+        style={{ background: `linear-gradient(180deg, ${hexToRgba(accent, 0.7)} 0%, ${hexToRgba(tint, 0.5)} 100%)` }}
+      />
+      <div 
+        className={`${styles.liquidBlob} ${styles.liquidBlob3}`} 
+        aria-hidden="true"
+        style={{ background: `linear-gradient(180deg, ${hexToRgba(tint, 0.6)} 0%, ${hexToRgba(accent, 0.4)} 100%)` }}
+      />
+    </>
+  )
+}
+
+/** Default blobs without custom styling */
+function DefaultBlobs() {
+  return (
+    <>
+      <div className={`${styles.liquidBlob} ${styles.liquidBlob1}`} aria-hidden="true" />
+      <div className={`${styles.liquidBlob} ${styles.liquidBlob2}`} aria-hidden="true" />
+      <div className={`${styles.liquidBlob} ${styles.liquidBlob3}`} aria-hidden="true" />
+    </>
+  )
+}
+
+/** Logo component */
+interface LogoProps {
+  url?: string | null
+  name: string | null
+  size: number
+  radius: string
+}
+
+function Logo({ url, name, size, radius }: LogoProps) {
+  const initial = name ? name.charAt(0).toUpperCase() : '?'
+  
+  if (url) {
+    return (
+      <div className={styles.logo} style={{ width: size, height: size, borderRadius: radius }}>
+        <img src={url} alt={name || 'Business logo'} className={styles.logoImage} style={{ borderRadius: radius }} />
+      </div>
+    )
+  }
+  
+  return (
+    <div className={styles.logo} style={{ width: size, height: size, borderRadius: radius, fontSize: size * 0.4 }} aria-hidden="true">
+      {initial}
+    </div>
+  )
+}
+
+/** Glass card wrapper for status screens */
+interface StatusScreenProps {
+  icon: string
+  title: string
+  subtitle: string
+  isError?: boolean
+}
+
+function StatusScreen({ icon, title, subtitle, isError }: StatusScreenProps) {
+  return (
+    <div className={styles.container}>
+      <DefaultBlobs />
+      <div className={styles.content}>
+        <div className={styles.glassCard}>
+          <div className={isError ? styles.errorScreen : styles.successScreen} role={isError ? 'alert' : undefined}>
+            <div className={isError ? styles.errorIcon : styles.successIcon} aria-hidden="true">{icon}</div>
+            <h2 className={isError ? styles.errorTitle : styles.successTitle}>{title}</h2>
+            <p className={isError ? styles.errorSubtitle : styles.successSubtitle}>{subtitle}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────
+// Main Survey Form Component
+// ─────────────────────────────────────────────────────────────
 
 function SurveyForm() {
   const { t } = useI18n()
@@ -16,7 +162,6 @@ function SurveyForm() {
   const location = searchParams.get('location') || 'Default'
 
   const [rating, setRating] = useState(0)
-  const [hoveredRating, setHoveredRating] = useState(0)
   const [comment, setComment] = useState('')
   const [image, setImage] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
@@ -27,65 +172,90 @@ function SurveyForm() {
   const [alreadySubmitted, setAlreadySubmitted] = useState(false)
   const [branding, setBranding] = useState<BrandingConfig>(DEFAULT_BRANDING)
 
-  const cookieName = `feedback_submitted_${business}_table_${table}`
-
+  // Fetch business data on mount
   useEffect(() => {
-    // Check if already submitted
-    // Temporarily disabled for testing
-    // if (typeof window !== 'undefined' && localStorage.getItem(cookieName)) {
-    //   setAlreadySubmitted(true)
-    // }
-
-    if (business) {
-      fetchBusinessData()
-    }
-  }, [cookieName, business])
-
-  const fetchBusinessData = async () => {
-    const { data, error } = await supabase
-      .from('businesses')
-      .select('name, branding')
-      .eq('id', business)
-      .single()
+    if (!business) return
     
-    console.log('Business data fetched:', data, 'Error:', error)
-    
-    if (data) {
-      setBusinessName(data.name)
-      if (data.branding) {
-        // Deep merge branding with defaults to handle nested objects
-        const mergedBranding: BrandingConfig = {
-          ...DEFAULT_BRANDING,
-          ...data.branding,
-          colors: { ...DEFAULT_BRANDING.colors, ...data.branding.colors },
-          typography: { ...DEFAULT_BRANDING.typography, ...data.branding.typography },
-          layout: { ...DEFAULT_BRANDING.layout, ...data.branding.layout },
-          custom: { ...DEFAULT_BRANDING.custom, ...data.branding.custom },
+    const fetchData = async () => {
+      const { data } = await supabase
+        .from('businesses')
+        .select('name, branding')
+        .eq('id', business)
+        .single()
+      
+      if (data) {
+        setBusinessName(data.name)
+        if (data.branding) {
+          setBranding(mergeBranding(data.branding))
         }
-        console.log('Merged branding:', mergedBranding)
-        setBranding(mergedBranding)
       }
     }
-  }
+    
+    fetchData()
+  }, [business])
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Memoized derived values
+  const glassEnabled = branding.layout.glassEnabled ?? true
+  const glassTint = branding.custom.glassCardTint || '#667eea'
+  const ratingColor = branding.custom.ratingButtonColor || '#ffffff'
+  
+  const derivedStyles = useMemo(() => ({
+    fontWeight: getFontWeight(branding.typography.fontWeight),
+    logoSize: getLogoSize(branding.logoSize),
+    logoRadius: getLogoRadius(branding.logoShape),
+    background: glassEnabled
+      ? `linear-gradient(135deg, ${glassTint} 0%, ${hexToRgba(glassTint, 0.7)} 50%, ${branding.colors.accent} 100%)`
+      : branding.colors.background,
+    cardBg: hexToRgba(glassTint, 0.15),
+  }), [branding, glassEnabled, glassTint])
+
+  /** Get style for emoji/rating buttons based on glass mode and selection */
+  const getRatingButtonStyle = useCallback((isSelected: boolean) => {
+    if (glassEnabled) {
+      return {
+        background: hexToRgba(ratingColor, isSelected ? 0.25 : 0.1),
+        borderColor: hexToRgba(ratingColor, isSelected ? 0.5 : 0.2),
+      }
+    }
+    return {
+      borderColor: isSelected ? branding.colors.accent : 'transparent',
+      backgroundColor: isSelected ? `${branding.colors.accent}15` : 'transparent',
+    }
+  }, [glassEnabled, ratingColor, branding.colors.accent])
+
+  /** Get style for number rating buttons */
+  const getNumberButtonStyle = useCallback((isSelected: boolean) => {
+    if (glassEnabled) {
+      return {
+        backgroundColor: hexToRgba(ratingColor, isSelected ? 0.3 : 0.1),
+        borderColor: hexToRgba(ratingColor, 0.3),
+        color: 'rgba(255, 255, 255, 0.9)',
+      }
+    }
+    return {
+      backgroundColor: isSelected ? branding.colors.primary : 'transparent',
+      borderColor: branding.colors.primary,
+      color: isSelected ? '#fff' : branding.colors.primary,
+    }
+  }, [glassEnabled, ratingColor, branding.colors.primary])
+
+  // Event handlers
+  const handleImageChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    if (file) {
-      setImage(file)
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string)
-      }
-      reader.readAsDataURL(file)
-    }
-  }
+    if (!file) return
+    
+    setImage(file)
+    const reader = new FileReader()
+    reader.onloadend = () => setImagePreview(reader.result as string)
+    reader.readAsDataURL(file)
+  }, [])
 
-  const removeImage = () => {
+  const removeImage = useCallback(() => {
     setImage(null)
     setImagePreview(null)
-  }
+  }, [])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     setUploading(true)
@@ -106,20 +276,17 @@ function SurveyForm() {
 
     if (image) {
       const fileExt = image.name.split('.').pop()
-      const fileName = `${uuidv4()}.${fileExt}`
-      const filePath = `feedback-images/${fileName}`
+      const filePath = `feedback-images/${uuidv4()}.${fileExt}`
 
       const { error: uploadError } = await supabase.storage
         .from('feedback-images')
         .upload(filePath, image)
 
       if (uploadError) {
-        console.error('Upload error:', uploadError)
         setError('Error uploading image: ' + uploadError.message)
         setUploading(false)
         return
       }
-
       imagePath = filePath
     }
 
@@ -134,272 +301,206 @@ function SurveyForm() {
         image_path: imagePath ? [imagePath] : null 
       }])
 
-    if (!submitError) {
-      // Temporarily disabled for testing
-      // localStorage.setItem(cookieName, 'true')
-      setSubmitted(true)
-    } else {
-      console.error('Supabase error:', submitError)
+    if (submitError) {
       setError('Error submitting feedback: ' + submitError.message)
+    } else {
+      setSubmitted(true)
     }
     setUploading(false)
-  }
+  }, [table, business, location, rating, comment, image, t])
 
-  // Invalid link screen
+  // ─── Status Screens ───
   if (!table || !business) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.errorScreen}>
-          <div className={styles.errorIcon}>⚠️</div>
-          <h2 className={styles.errorTitle}>{t('survey.invalid_link')}</h2>
-          <p className={styles.errorSubtitle}>{t('survey.scan_valid_qr')}</p>
-        </div>
-      </div>
-    )
+    return <StatusScreen icon="⚠️" title={t('survey.invalid_link')} subtitle={t('survey.scan_valid_qr')} isError />
   }
 
-  // Already submitted screen
   if (alreadySubmitted) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.successScreen}>
-          <div className={styles.successIcon}>🔒</div>
-          <h2 className={styles.successTitle}>{t('survey.already_submitted')}</h2>
-          <p className={styles.successSubtitle}>{t('survey.once_per_visit')}</p>
-        </div>
-      </div>
-    )
+    return <StatusScreen icon="🔒" title={t('survey.already_submitted')} subtitle={t('survey.once_per_visit')} />
   }
 
-  // Success screen
   if (submitted) {
-    return (
-      <div 
-        className={styles.container}
-        style={{ 
-          backgroundColor: branding.colors.background,
-          fontFamily: branding.typography.fontFamily,
-        }}
-      >
-        <div className={styles.successScreen}>
-          <div className={styles.successIcon} style={{ color: branding.colors.accent }}>✓</div>
-          <h2 className={styles.successTitle} style={{ color: branding.colors.primary }}>
-            {branding.custom.thankYouMessage || t('survey.thank_you')}
-          </h2>
-          <p className={styles.successSubtitle}>{t('survey.feedback_helps')}</p>
-        </div>
-      </div>
-    )
+    return <StatusScreen icon="✓" title={branding.custom.thankYouMessage || t('survey.thank_you')} subtitle={t('survey.feedback_helps')} />
   }
 
-  // Helper for spacing
-  const spacingValue = branding.layout.spacing === 'compact' ? '16px' : branding.layout.spacing === 'spacious' ? '32px' : '24px'
-  
-  // Helper for font weight
-  const fontWeightValue = branding.typography.fontWeight === 'light' ? 300 : branding.typography.fontWeight === 'bold' ? 700 : 400
-
-  // Helper for card style
-  const cardStyles: React.CSSProperties = {
-    ...(branding.layout.cardStyle === 'flat' && { boxShadow: 'none', border: '1px solid #E5E7EB' }),
-    ...(branding.layout.cardStyle === 'elevated' && { boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }),
-    ...(branding.layout.cardStyle === 'rounded' && { borderRadius: '24px', border: '2px solid #E5E7EB' }),
-  }
-
-  // Helper for logo size
-  const logoSizeValue = branding.logoSize === 'small' ? 48 : branding.logoSize === 'large' ? 96 : 72
-  
-  // Helper for logo shape
-  const logoShapeStyle = branding.logoShape === 'square' ? '0' : branding.logoShape === 'circle' ? '50%' : '12px'
-
+  // ─── Main Form ───
   return (
     <div 
-      className={styles.container}
-      style={{ 
-        backgroundColor: branding.colors.background,
-        fontFamily: branding.typography.fontFamily,
-      }}
+      className={glassEnabled ? styles.container : styles.containerNoGlass}
+      style={{ fontFamily: branding.typography.fontFamily, background: derivedStyles.background }}
     >
-      <div 
-        className={styles.content}
-        style={{
-          ...cardStyles,
-          padding: spacingValue,
-        }}
-      >
-        {/* Language Switcher */}
-        <LanguageSwitcher 
-          className={styles.languageSwitcher} 
-          activeColor={branding.custom.languageSwitcherColor}
-        />
-        
-        {/* Header */}
+      {glassEnabled && <LiquidBlobs tint={glassTint} accent={branding.colors.accent} />}
+      
+      <div className={styles.content}>
         <div 
-          className={styles.header}
-          style={{ 
-            textAlign: branding.layout.headerStyle === 'centered' ? 'center' : 'left',
-            alignItems: branding.layout.headerStyle === 'centered' ? 'center' : 'flex-start',
-          }}
+          className={glassEnabled ? styles.glassCard : styles.solidCard}
+          style={glassEnabled ? { background: derivedStyles.cardBg } : undefined}
         >
-          {/* Logo */}
-          {branding.logoUrl ? (
-            <img 
-              src={branding.logoUrl} 
-              alt={businessName || 'Logo'}
-              style={{
-                width: logoSizeValue,
-                height: logoSizeValue,
-                objectFit: 'cover',
-                borderRadius: logoShapeStyle,
-              }}
-            />
-          ) : (
-            <div 
-              className={styles.logo}
-              style={{
-                width: logoSizeValue,
-                height: logoSizeValue,
-                backgroundColor: branding.colors.primary,
-                borderRadius: logoShapeStyle,
-                fontSize: logoSizeValue * 0.5,
-              }}
-            >
-              {businessName ? businessName.charAt(0).toUpperCase() : '?'}
-            </div>
-          )}
+          {/* Language Switcher */}
+          <LanguageSwitcher 
+            className={styles.languageSwitcher} 
+            activeColor={branding.custom.languageSwitcherColor}
+          />
           
-          {/* Slogan */}
-          {branding.custom.slogan && (
-            <p 
-              className={styles.slogan}
-              style={{ 
-                color: branding.colors.secondary,
-                fontSize: branding.typography.subtitleSize,
-              }}
-            >
-              {branding.custom.slogan}
-            </p>
-          )}
-          
-          <h1 
-            className={styles.title}
-            style={{
-              color: branding.colors.primary,
-              fontSize: branding.typography.titleSize,
-              fontWeight: fontWeightValue,
+          {/* Header */}
+          <header 
+            className={styles.header}
+            style={{ 
+              textAlign: branding.layout.headerStyle === 'centered' ? 'center' : 'left',
+              alignItems: branding.layout.headerStyle === 'centered' ? 'center' : 'flex-start',
             }}
           >
-            {t('survey.header')}
-          </h1>
-          <span className={styles.tableTag}>{t('survey.table', { number: table || '' })}</span>
-        </div>
-
-        <form onSubmit={handleSubmit} className={styles.form}>
-          {/* Rating Section */}
-          <div className={styles.section}>
-            <label 
-              className={styles.label}
-              style={{ fontSize: branding.typography.bodySize }}
-            >
-              {t('survey.rate_experience')}
-            </label>
-            {branding.layout.showSentimentIcons && (
-              <div className={styles.emojiContainer}>
-                {[
-                  { value: 1, emoji: '😡' },
-                  { value: 2, emoji: '😞' },
-                  { value: 3, emoji: '😐' },
-                  { value: 4, emoji: '😊' },
-                  { value: 5, emoji: '😍' },
-                ].map(({ value, emoji }) => (
-                  <button
-                    type="button"
-                    key={value}
-                    onClick={() => setRating(value)}
-                    className={`${styles.emojiButton} ${rating === value ? styles.emojiButtonActive : ''}`}
-                    style={{
-                      borderColor: rating === value ? branding.colors.accent : 'transparent',
-                      backgroundColor: rating === value ? `${branding.colors.accent}15` : 'transparent',
-                    }}
-                  >
-                    <span className={styles.emoji}>{emoji}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-            {!branding.layout.showSentimentIcons && (
-              <div className={styles.ratingButtons}>
-                {[1, 2, 3, 4, 5].map((n) => (
-                  <button
-                    type="button"
-                    key={n}
-                    onClick={() => setRating(n)}
-                    className={`${styles.ratingButton} ${rating === n ? styles.ratingButtonActive : ''}`}
-                    style={{
-                      backgroundColor: rating === n ? branding.colors.primary : 'transparent',
-                      borderColor: branding.colors.primary,
-                      color: rating === n ? '#fff' : branding.colors.primary,
-                    }}
-                  >
-                    {n}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Comment Section */}
-          <div className={styles.section}>
-            <textarea
-              className={styles.textarea}
-              placeholder={t('survey.comment_placeholder')}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              rows={4}
+            {/* Logo */}
+            <Logo 
+              url={branding.logoUrl}
+              name={businessName}
+              size={derivedStyles.logoSize}
+              radius={derivedStyles.logoRadius}
             />
-          </div>
+            
+            {/* Slogan */}
+            {branding.custom.slogan && (
+              <p 
+                className={styles.slogan}
+                style={{ 
+                  fontSize: branding.typography.subtitleSize,
+                  color: glassEnabled ? 'rgba(255, 255, 255, 0.8)' : branding.colors.secondary,
+                }}
+              >
+                {branding.custom.slogan}
+              </p>
+            )}
+            
+            <h1 
+              className={styles.title}
+              style={{
+                fontSize: branding.typography.titleSize,
+                fontWeight: derivedStyles.fontWeight,
+                color: glassEnabled ? 'rgba(255, 255, 255, 0.95)' : branding.colors.primary,
+              }}
+            >
+              {t('survey.header')}
+            </h1>
+            <span className={styles.tableTag}>{t('survey.table', { number: table || '' })}</span>
+          </header>
 
-          {/* Image Upload Section */}
-          <div className={styles.section}>
-            {!imagePreview ? (
-              <label className={styles.uploadCard}>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className={styles.fileInput}
-                />
-                <svg className={styles.cameraIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                  <circle cx="12" cy="13" r="4" />
-                </svg>
-                <span className={styles.uploadText}>{t('survey.add_photo')}</span>
+          <form onSubmit={handleSubmit} className={styles.form} aria-label="Feedback form">
+            {/* Rating Section */}
+            <fieldset className={styles.section}>
+              <legend 
+                className={styles.label}
+                style={{ 
+                  fontSize: branding.typography.bodySize,
+                  color: glassEnabled ? 'rgba(255, 255, 255, 0.9)' : 'var(--text-primary)',
+                }}
+              >
+                {t('survey.rate_experience')}
+              </legend>
+              {branding.layout.showSentimentIcons && (
+                <div className={styles.emojiContainer} role="radiogroup" aria-label="Rating selection">
+                  {RATING_OPTIONS.map(({ value, emoji, label }) => (
+                    <button
+                      type="button"
+                      key={value}
+                      onClick={() => setRating(value)}
+                      className={`${styles.emojiButton} ${rating === value ? styles.emojiButtonActive : ''}`}
+                      role="radio"
+                      aria-checked={rating === value}
+                      aria-label={`${label} - ${value} out of 5`}
+                      style={getRatingButtonStyle(rating === value)}
+                    >
+                      <span className={styles.emoji} aria-hidden="true">{emoji}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+              {!branding.layout.showSentimentIcons && (
+                <div className={styles.ratingButtons} role="radiogroup" aria-label="Rating selection">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <button
+                      type="button"
+                      key={n}
+                      onClick={() => setRating(n)}
+                      className={`${styles.ratingButton} ${rating === n ? styles.ratingButtonActive : ''}`}
+                      role="radio"
+                      aria-checked={rating === n}
+                      aria-label={`${n} out of 5`}
+                      style={getNumberButtonStyle(rating === n)}
+                    >
+                      {n}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </fieldset>
+
+            {/* Comment Section */}
+            <div className={styles.section}>
+              <label htmlFor="feedback-comment" className="sr-only">
+                {t('survey.comment_placeholder')}
               </label>
-            ) : (
-              <div className={styles.imagePreviewContainer}>
-                <img src={imagePreview} alt={t('survey.preview')} className={styles.imagePreview} />
-                <button type="button" onClick={removeImage} className={styles.removeImageButton}>
-                  ✕
-                </button>
-              </div>
-            )}
-          </div>
+              <textarea
+                id="feedback-comment"
+                className={styles.textarea}
+                placeholder={t('survey.comment_placeholder')}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                rows={4}
+                aria-label="Additional comments"
+              />
+            </div>
 
-          {/* Error Message */}
-          {error && <p className={styles.error}>{error}</p>}
+            {/* Image Upload Section */}
+            <div className={styles.section}>
+              {!imagePreview ? (
+                <label className={styles.uploadCard}>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className={styles.fileInput}
+                    aria-label={t('survey.add_photo')}
+                  />
+                  <svg className={styles.cameraIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                    <circle cx="12" cy="13" r="4" />
+                  </svg>
+                  <span className={styles.uploadText}>{t('survey.add_photo')}</span>
+                </label>
+              ) : (
+                <div className={styles.imagePreviewContainer}>
+                  <img src={imagePreview} alt={t('survey.preview')} className={styles.imagePreview} />
+                  <button 
+                    type="button" 
+                    onClick={removeImage} 
+                    className={styles.removeImageButton}
+                    aria-label="Remove uploaded image"
+                  >
+                    ✕
+                  </button>
+                </div>
+              )}
+            </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={uploading}
-            className={styles.submitButton}
-            style={{
-              backgroundColor: branding.custom.ctaButtonColor || branding.colors.primary,
-              fontSize: branding.typography.bodySize,
-            }}
-          >
-            {uploading ? t('survey.sending') : (branding.custom.ctaButtonText || t('survey.submit'))}
-          </button>
-        </form>
+            {/* Error Message */}
+            {error && <p className={styles.error} role="alert" aria-live="polite">{error}</p>}
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={uploading}
+              className={styles.submitButton}
+              style={{
+                fontSize: branding.typography.bodySize,
+                backgroundColor: glassEnabled 
+                  ? hexToRgba(branding.custom.ctaButtonColor || branding.colors.primary, 0.85)
+                  : branding.custom.ctaButtonColor || branding.colors.primary,
+              }}
+              aria-busy={uploading}
+            >
+              {uploading ? t('survey.sending') : (branding.custom.ctaButtonText || t('survey.submit'))}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   )
@@ -409,7 +510,18 @@ export default function Survey() {
   return (
     <Suspense fallback={
       <div className={styles.container}>
-        <div className={styles.loading}>Loading...</div>
+        {/* Liquid Background Blobs */}
+        <div className={`${styles.liquidBlob} ${styles.liquidBlob1}`} aria-hidden="true" />
+        <div className={`${styles.liquidBlob} ${styles.liquidBlob2}`} aria-hidden="true" />
+        <div className={`${styles.liquidBlob} ${styles.liquidBlob3}`} aria-hidden="true" />
+        
+        <div className={styles.content}>
+          <div className={styles.glassCard}>
+            <div className={styles.loading} role="status" aria-live="polite">
+              Loading...
+            </div>
+          </div>
+        </div>
       </div>
     }>
       <SurveyForm />

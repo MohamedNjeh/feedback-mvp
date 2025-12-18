@@ -517,15 +517,111 @@
   margin: 0;
 }
 
+.glassIndicator {
+  font-size: 12px;
+  font-weight: 600;
+  color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.previewHeader {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .previewContainer {
   padding: 24px;
   min-height: 400px;
   transition: all 0.3s ease;
 }
 
+.previewContainerGlass {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Liquid Blobs for Preview */
+.previewBlob1,
+.previewBlob2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+  animation: previewBlobMove 15s ease-in-out infinite;
+}
+
+.previewBlob1 {
+  width: 150px;
+  height: 150px;
+  top: -40px;
+  left: -40px;
+}
+
+.previewBlob2 {
+  width: 120px;
+  height: 120px;
+  bottom: -30px;
+  right: -30px;
+  animation-delay: -7s;
+}
+
+@keyframes previewBlobMove {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, 20px) scale(1.1);
+  }
+}
+
 .previewCard {
   background: #ffffff;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Glass Card Style */
+.previewGlassCard {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.previewGlassCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 .cardFlat {
@@ -545,8 +641,33 @@
 
 .previewLogo {
   display: flex;
-  justify-content: center;
   margin-bottom: 16px;
+}
+
+.previewLogoWrapper {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.previewLogoWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.previewLogoPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.previewLogoGlass {
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .previewLogoSmall img {
@@ -610,6 +731,56 @@
   min-height: 80px;
 }
 
+.previewTextareaGlass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Preview Table Tag */
+.previewTableTag {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.previewTableTag span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8B8B8B;
+  background: #F3F4F6;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.previewTableTagGlass span {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Preview Rating Numbers */
+.previewRatingNumbers {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.previewRatingNumber {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
 .previewFields {
   display: flex;
   flex-direction: column;
@@ -634,11 +805,52 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .previewButton:hover {
   opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.previewButtonGlass {
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.previewButtonGlass:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Toggle Hint */
+.toggleHint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 4px 0 12px 56px;
+  line-height: 1.4;
+}
+
+/* Glass Section in Custom */
+.glassSection {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.sectionSubtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+
+.sectionHint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+  line-height: 1.4;
 }
 
 /* Responsive */

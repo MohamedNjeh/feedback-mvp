@@ -55,6 +55,7 @@ export interface LayoutOptions {
   cardStyle: CardStyle
   spacing: Spacing
   showSentimentIcons: boolean
+  glassEnabled: boolean
 }
 
 export interface CustomBranding {
@@ -63,6 +64,8 @@ export interface CustomBranding {
   ctaButtonText: string
   ctaButtonColor: string
   languageSwitcherColor: string
+  glassCardTint: string
+  ratingButtonColor: string
 }
 
 export interface BrandingConfig {
@@ -106,6 +109,7 @@ export const DEFAULT_BRANDING: BrandingConfig = {
     cardStyle: 'elevated',
     spacing: 'regular',
     showSentimentIcons: true,
+    glassEnabled: true,
   },
   custom: {
     slogan: '',
@@ -113,5 +117,7 @@ export const DEFAULT_BRANDING: BrandingConfig = {
     ctaButtonText: 'Send Feedback',
     ctaButtonColor: '#4F46E5',
     languageSwitcherColor: '#6B7280',
+    glassCardTint: '#667eea',
+    ratingButtonColor: '#ffffff',
   },
 }

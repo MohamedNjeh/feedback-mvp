@@ -42,6 +42,13 @@ export function LayoutSection({ branding, setBranding, t }: LayoutSectionProps) 
     }))
   }
 
+  const handleGlassEnabledChange = (checked: boolean) => {
+    setBranding(prev => ({
+      ...prev,
+      layout: { ...prev.layout, glassEnabled: checked }
+    }))
+  }
+
   const getHeaderStyleLabel = (style: HeaderStyle) => {
     return t(`branding.layout.${style === 'left-aligned' ? 'full_width' : style}`)
   }
@@ -104,6 +111,17 @@ export function LayoutSection({ branding, setBranding, t }: LayoutSectionProps) 
       </div>
 
       <div className={styles.toggleGroup}>
+        <label className={styles.toggle}>
+          <input
+            type="checkbox"
+            checked={branding.layout.glassEnabled ?? true}
+            onChange={(e) => handleGlassEnabledChange(e.target.checked)}
+          />
+          <span className={styles.toggleSlider}></span>
+          {t('branding.layout.glass_effect')}
+        </label>
+        <p className={styles.toggleHint}>{t('branding.layout.glass_effect_hint')}</p>
+        
         <label className={styles.toggle}>
           <input
             type="checkbox"

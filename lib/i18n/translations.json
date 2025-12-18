@@ -256,6 +256,16 @@
         "en": "Show Sentiment Icons",
         "fr": "Afficher les icônes de sentiment",
         "ar": "إظهار أيقونات المشاعر"
+      },
+      "glass_effect": {
+        "en": "Enable Glass Effect",
+        "fr": "Activer l'effet de verre",
+        "ar": "تفعيل تأثير الزجاج"
+      },
+      "glass_effect_hint": {
+        "en": "Modern frosted glass appearance with animated background",
+        "fr": "Apparence de verre dépoli moderne avec un arrière-plan animé",
+        "ar": "مظهر زجاج مصنفر حديث مع خلفية متحركة"
       }
     },
     "custom": {
@@ -303,6 +313,26 @@
         "en": "Language Switcher Color",
         "fr": "Couleur du sélecteur de langue",
         "ar": "لون محول اللغة"
+      },
+      "glass_branding": {
+        "en": "Glass Effect Colors",
+        "fr": "Couleurs de l'effet de verre",
+        "ar": "ألوان تأثير الزجاج"
+      },
+      "glass_branding_hint": {
+        "en": "Customize colors when glass effect is enabled",
+        "fr": "Personnalisez les couleurs lorsque l'effet de verre est activé",
+        "ar": "خصص الألوان عند تفعيل تأثير الزجاج"
+      },
+      "glass_card_tint": {
+        "en": "Glass Background Tint",
+        "fr": "Teinte de fond du verre",
+        "ar": "صبغة خلفية الزجاج"
+      },
+      "rating_button_color": {
+        "en": "Rating Button Color",
+        "fr": "Couleur des boutons de notation",
+        "ar": "لون أزرار التقييم"
       }
     },
     "sections": {

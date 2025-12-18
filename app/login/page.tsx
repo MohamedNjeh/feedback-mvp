@@ -97,6 +97,10 @@ export default function Login() {
             />
           </div>
 
+          <div className={styles.forgotPassword}>
+            <Link href="/forgot-password">{t('dashboard.login.forgot_password')}</Link>
+          </div>
+
           {error && <div className={styles.error}>{error}</div>}
 
           <button

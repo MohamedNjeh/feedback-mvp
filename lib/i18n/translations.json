@@ -812,6 +812,105 @@
         "ar": "إنشاء حساب"
       }
     },
+    "forgot_password": {
+      "title": {
+        "en": "Reset Password",
+        "fr": "Réinitialiser le mot de passe",
+        "ar": "إعادة تعيين كلمة المرور"
+      },
+      "subtitle": {
+        "en": "Enter your email and we'll send you a reset link",
+        "fr": "Entrez votre e-mail et nous vous enverrons un lien de réinitialisation",
+        "ar": "أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين"
+      },
+      "submit": {
+        "en": "Send Reset Link",
+        "fr": "Envoyer le lien",
+        "ar": "إرسال رابط إعادة التعيين"
+      },
+      "sending": {
+        "en": "Sending...",
+        "fr": "Envoi en cours...",
+        "ar": "جارٍ الإرسال..."
+      },
+      "success": {
+        "en": "Check your email for a password reset link!",
+        "fr": "Vérifiez votre e-mail pour le lien de réinitialisation !",
+        "ar": "تحقق من بريدك الإلكتروني للحصول على رابط إعادة التعيين!"
+      },
+      "remember": {
+        "en": "Remember your password?",
+        "fr": "Vous vous souvenez de votre mot de passe ?",
+        "ar": "تتذكر كلمة المرور؟"
+      },
+      "back_to_login": {
+        "en": "Back to login",
+        "fr": "Retour à la connexion",
+        "ar": "العودة لتسجيل الدخول"
+      }
+    },
+    "reset_password": {
+      "title": {
+        "en": "Set New Password",
+        "fr": "Définir un nouveau mot de passe",
+        "ar": "تعيين كلمة مرور جديدة"
+      },
+      "subtitle": {
+        "en": "Enter your new password below",
+        "fr": "Entrez votre nouveau mot de passe ci-dessous",
+        "ar": "أدخل كلمة المرور الجديدة أدناه"
+      },
+      "new_password": {
+        "en": "New Password",
+        "fr": "Nouveau mot de passe",
+        "ar": "كلمة المرور الجديدة"
+      },
+      "new_password_placeholder": {
+        "en": "Enter new password",
+        "fr": "Entrez le nouveau mot de passe",
+        "ar": "أدخل كلمة المرور الجديدة"
+      },
+      "confirm_password": {
+        "en": "Confirm Password",
+        "fr": "Confirmer le mot de passe",
+        "ar": "تأكيد كلمة المرور"
+      },
+      "confirm_password_placeholder": {
+        "en": "Confirm new password",
+        "fr": "Confirmez le nouveau mot de passe",
+        "ar": "تأكيد كلمة المرور الجديدة"
+      },
+      "submit": {
+        "en": "Update Password",
+        "fr": "Mettre à jour le mot de passe",
+        "ar": "تحديث كلمة المرور"
+      },
+      "updating": {
+        "en": "Updating...",
+        "fr": "Mise à jour...",
+        "ar": "جارٍ التحديث..."
+      },
+      "success": {
+        "en": "Password updated successfully! Redirecting to login...",
+        "fr": "Mot de passe mis à jour avec succès ! Redirection vers la connexion...",
+        "ar": "تم تحديث كلمة المرور بنجاح! جارٍ إعادة التوجيه..."
+      },
+      "passwords_mismatch": {
+        "en": "Passwords do not match",
+        "fr": "Les mots de passe ne correspondent pas",
+        "ar": "كلمات المرور غير متطابقة"
+      },
+      "password_too_short": {
+        "en": "Password must be at least 6 characters",
+        "fr": "Le mot de passe doit contenir au moins 6 caractères",
+        "ar": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل"
+      },
+      "invalid_link": {
+        "en": "Invalid or expired reset link. Please request a new one.",
+        "fr": "Lien invalide ou expiré. Veuillez en demander un nouveau.",
+        "ar": "رابط غير صالح أو منتهي الصلاحية. يرجى طلب رابط جديد."
+      }
+    },
     "signup": {
       "title": {
         "en": "Create your account",

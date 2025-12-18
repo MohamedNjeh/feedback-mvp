@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import { supabase } from '@/lib/supabase'
 import { useI18n } from '@/lib/i18n'
 import { useAuth, useFeedback } from '@/hooks'
 import { isAlert, getMatchedKeyword, formatRelativeTime, getRatingEmoji } from '@/lib/utils'
@@ -15,8 +16,27 @@ export default function AlertsPage() {
   const { feedbacks, loading: feedbackLoading } = useFeedback(business?.id)
   const [resolvedIds, setResolvedIds] = useState<Set<string>>(new Set())
   const [selectedFeedback, setSelectedFeedback] = useState<Feedback | null>(null)
+  const [resolvingId, setResolvingId] = useState<string | null>(null)
 
   const loading = authLoading || feedbackLoading
+
+  // Fetch resolved alerts from database
+  const fetchResolvedAlerts = useCallback(async () => {
+    if (!business?.id) return
+
+    const { data, error } = await supabase
+      .from('resolved_alerts')
+      .select('feedback_id')
+      .eq('business_id', business.id)
+
+    if (!error && data) {
+      setResolvedIds(new Set(data.map((r) => r.feedback_id)))
+    }
+  }, [business?.id])
+
+  useEffect(() => {
+    fetchResolvedAlerts()
+  }, [fetchResolvedAlerts])
 
   // Filter alerts from feedbacks
   const alerts = feedbacks.filter(isAlert)
@@ -29,8 +49,30 @@ export default function AlertsPage() {
     return t('alerts.title')
   }
 
-  const handleResolve = (id: string) => {
-    setResolvedIds((prev) => new Set([...prev, id]))
+  const handleResolve = async (feedbackId: string) => {
+    if (!business?.id) return
+
+    setResolvingId(feedbackId)
+
+    const { error } = await supabase
+      .from('resolved_alerts')
+      .insert({
+        feedback_id: feedbackId,
+        business_id: business.id,
+        resolved_by: business.id,
+      })
+
+    if (!error) {
+      setResolvedIds((prev) => new Set([...prev, feedbackId]))
+    } else {
+      console.error('Error resolving alert:', error)
+      // If it's a duplicate, still mark as resolved locally
+      if (error.code === '23505') {
+        setResolvedIds((prev) => new Set([...prev, feedbackId]))
+      }
+    }
+
+    setResolvingId(null)
   }
 
   if (loading) {
@@ -72,8 +114,9 @@ export default function AlertsPage() {
                   <button
                     className={styles.resolveButton}
                     onClick={() => handleResolve(alert.id)}
+                    disabled={resolvingId === alert.id}
                   >
-                    {t('alerts.mark_resolved')}
+                    {resolvingId === alert.id ? '...' : t('alerts.mark_resolved')}
                   </button>
                   <button
                     className={styles.viewButton}

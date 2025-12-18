@@ -1,4 +1,490 @@
 {
+  "landing": {
+    "nav": {
+      "features": {
+        "en": "Features",
+        "fr": "Fonctionnalités",
+        "ar": "المميزات"
+      },
+      "how_it_works": {
+        "en": "How It Works",
+        "fr": "Comment ça marche",
+        "ar": "كيف يعمل"
+      },
+      "pricing": {
+        "en": "Pricing",
+        "fr": "Tarifs",
+        "ar": "الأسعار"
+      },
+      "login": {
+        "en": "Login",
+        "fr": "Connexion",
+        "ar": "تسجيل الدخول"
+      }
+    },
+    "hero": {
+      "title": {
+        "en": "Know What Your Customers Think — Before They Leave a Bad Review",
+        "fr": "Sachez Ce Que Vos Clients Pensent — Avant Qu'ils Ne Laissent un Avis Négatif",
+        "ar": "اعرف رأي زبائنك — قبل أن يتركوا تقييماً سلبياً"
+      },
+      "subtitle": {
+        "en": "AlertTable lets your guests share feedback instantly via QR code. Get real-time alerts when something goes wrong, so you can fix it during service — not after.",
+        "fr": "AlertTable permet à vos clients de partager leur avis instantanément via QR code. Recevez des alertes en temps réel dès qu'un problème survient, et corrigez-le pendant le service — pas après.",
+        "ar": "AlertTable يتيح لزبائنك مشاركة آرائهم فوراً عبر رمز QR. تلقَّ تنبيهات فورية عند حدوث أي مشكلة، وأصلحها أثناء الخدمة — لا بعد فوات الأوان."
+      },
+      "cta_primary": {
+        "en": "Start Free Trial",
+        "fr": "Essai Gratuit",
+        "ar": "ابدأ التجربة المجانية"
+      },
+      "cta_secondary": {
+        "en": "See How It Works",
+        "fr": "Voir Comment Ça Marche",
+        "ar": "شاهد كيف يعمل"
+      },
+      "badge1": {
+        "en": "No credit card required",
+        "fr": "Sans carte bancaire",
+        "ar": "بدون بطاقة بنكية"
+      },
+      "badge2": {
+        "en": "Setup in 5 minutes",
+        "fr": "Installation en 5 minutes",
+        "ar": "الإعداد في 5 دقائق"
+      },
+      "badge3": {
+        "en": "Works on any phone",
+        "fr": "Fonctionne sur tous les téléphones",
+        "ar": "يعمل على أي هاتف"
+      },
+      "mockup_title": {
+        "en": "How was your experience?",
+        "fr": "Comment s'est passée votre expérience ?",
+        "ar": "كيف كانت تجربتك؟"
+      },
+      "alert_title": {
+        "en": "New Alert",
+        "fr": "Nouvelle Alerte",
+        "ar": "تنبيه جديد"
+      },
+      "alert_text": {
+        "en": "Table 5 left negative feedback",
+        "fr": "Table 5 a laissé un avis négatif",
+        "ar": "الطاولة 5 تركت تقييماً سلبياً"
+      }
+    },
+    "problem": {
+      "title": {
+        "en": "Bad Reviews Hurt. But They Didn't Have to Happen.",
+        "fr": "Les Avis Négatifs Font Mal. Mais Ils Auraient Pu Être Évités.",
+        "ar": "التقييمات السلبية مؤلمة. لكنها كانت قابلة للتفادي."
+      },
+      "subtitle": {
+        "en": "Most unhappy customers don't complain — they just leave. Then they write a 1-star review online.",
+        "fr": "La plupart des clients mécontents ne se plaignent pas — ils partent simplement. Puis ils laissent un avis 1 étoile en ligne.",
+        "ar": "معظم الزبائن غير الراضين لا يشتكون — يغادرون فقط. ثم يكتبون تقييماً سلبياً على الإنترنت."
+      },
+      "pain1": {
+        "en": "You find out about problems too late",
+        "fr": "Vous découvrez les problèmes trop tard",
+        "ar": "تكتشف المشاكل بعد فوات الأوان"
+      },
+      "pain2": {
+        "en": "Staff doesn't know what went wrong",
+        "fr": "Votre équipe ne sait pas ce qui s'est passé",
+        "ar": "فريقك لا يعرف ما حدث"
+      },
+      "pain3": {
+        "en": "Negative reviews pile up while you're unaware",
+        "fr": "Les avis négatifs s'accumulent à votre insu",
+        "ar": "التقييمات السلبية تتراكم دون علمك"
+      },
+      "pain4": {
+        "en": "Customers leave without giving you a chance to fix it",
+        "fr": "Les clients partent sans vous donner la chance de corriger",
+        "ar": "الزبائن يغادرون دون منحك فرصة للإصلاح"
+      }
+    },
+    "solution": {
+      "title": {
+        "en": "Catch Problems in Real Time. Fix Them on the Spot.",
+        "fr": "Détectez les Problèmes en Temps Réel. Corrigez-les Sur Place.",
+        "ar": "اكتشف المشاكل فوراً. أصلحها في الحال."
+      },
+      "text1": {
+        "en": "AlertTable puts a simple QR code on every table. Customers scan it, rate their experience, and leave a comment — in under 30 seconds.",
+        "fr": "AlertTable place un simple QR code sur chaque table. Les clients le scannent, notent leur expérience et laissent un commentaire — en moins de 30 secondes.",
+        "ar": "AlertTable يضع رمز QR بسيط على كل طاولة. الزبائن يمسحونه، يقيّمون تجربتهم، ويتركون تعليقاً — في أقل من 30 ثانية."
+      },
+      "text2": {
+        "en": "If something's wrong, you get an instant alert. No app to download. No awkward conversations. Just honest feedback, delivered in real time.",
+        "fr": "Si quelque chose ne va pas, vous recevez une alerte instantanée. Pas d'application à télécharger. Pas de conversations gênantes. Juste des retours honnêtes, en temps réel.",
+        "ar": "إذا كان هناك مشكلة، تتلقى تنبيهاً فورياً. لا تطبيق للتحميل. لا محادثات محرجة. فقط آراء صادقة، في الوقت الحقيقي."
+      },
+      "benefit1_title": {
+        "en": "Instant Alerts",
+        "fr": "Alertes Instantanées",
+        "ar": "تنبيهات فورية"
+      },
+      "benefit1_text": {
+        "en": "Get notified the moment a customer is unhappy",
+        "fr": "Soyez notifié dès qu'un client est mécontent",
+        "ar": "اعرف فوراً عندما يكون زبون غير راضٍ"
+      },
+      "benefit2_title": {
+        "en": "Anonymous Feedback",
+        "fr": "Avis Anonymes",
+        "ar": "آراء مجهولة"
+      },
+      "benefit2_text": {
+        "en": "Customers are more honest when it's private",
+        "fr": "Les clients sont plus honnêtes quand c'est privé",
+        "ar": "الزبائن أكثر صدقاً عندما تكون خاصة"
+      },
+      "benefit3_title": {
+        "en": "Fix During Service",
+        "fr": "Correction Pendant le Service",
+        "ar": "الإصلاح أثناء الخدمة"
+      },
+      "benefit3_text": {
+        "en": "Resolve issues before they become reviews",
+        "fr": "Résolvez les problèmes avant qu'ils ne deviennent des avis",
+        "ar": "حل المشاكل قبل أن تصبح تقييمات سلبية"
+      }
+    },
+    "how": {
+      "title": {
+        "en": "Simple Setup. Powerful Results.",
+        "fr": "Installation Simple. Résultats Puissants.",
+        "ar": "إعداد بسيط. نتائج قوية."
+      },
+      "step1_title": {
+        "en": "Generate QR Codes",
+        "fr": "Générez Vos QR Codes",
+        "ar": "أنشئ رموز QR"
+      },
+      "step1_text": {
+        "en": "Create unique QR codes for each table in your restaurant. Print them or display on table stands.",
+        "fr": "Créez des QR codes uniques pour chaque table. Imprimez-les ou affichez-les sur des supports de table.",
+        "ar": "أنشئ رموز QR فريدة لكل طاولة في مطعمك. اطبعها أو اعرضها على حوامل الطاولات."
+      },
+      "step2_title": {
+        "en": "Customers Scan & Rate",
+        "fr": "Les Clients Scannent et Notent",
+        "ar": "الزبائن يمسحون ويقيّمون"
+      },
+      "step2_text": {
+        "en": "Guests scan the code with their phone camera. No app needed. They rate their experience and leave optional comments.",
+        "fr": "Vos clients scannent le code avec leur téléphone. Pas d'application requise. Ils notent leur expérience et laissent un commentaire.",
+        "ar": "الزبائن يمسحون الرمز بكاميرا هاتفهم. لا حاجة لتطبيق. يقيّمون تجربتهم ويتركون تعليقاً."
+      },
+      "step3_title": {
+        "en": "Get Alerts & Insights",
+        "fr": "Recevez Alertes et Statistiques",
+        "ar": "تلقَّ التنبيهات والإحصائيات"
+      },
+      "step3_text": {
+        "en": "Receive instant notifications for negative feedback. View all responses in your live dashboard.",
+        "fr": "Recevez des notifications instantanées pour les avis négatifs. Consultez toutes les réponses dans votre tableau de bord.",
+        "ar": "احصل على إشعارات فورية للتقييمات السلبية. شاهد جميع الردود في لوحة التحكم."
+      }
+    },
+    "features": {
+      "title": {
+        "en": "Everything You Need to Listen to Your Customers",
+        "fr": "Tout Ce Dont Vous Avez Besoin Pour Écouter Vos Clients",
+        "ar": "كل ما تحتاجه للاستماع إلى زبائنك"
+      },
+      "alerts_title": {
+        "en": "Real-Time Alerts",
+        "fr": "Alertes en Temps Réel",
+        "ar": "تنبيهات فورية"
+      },
+      "alerts_text": {
+        "en": "Get notified instantly when a customer gives a low rating or mentions a problem. Act before they leave.",
+        "fr": "Soyez notifié instantanément quand un client donne une mauvaise note ou mentionne un problème.",
+        "ar": "تلقَّ إشعاراً فورياً عندما يعطي زبون تقييماً منخفضاً أو يذكر مشكلة."
+      },
+      "dashboard_title": {
+        "en": "Live Dashboard",
+        "fr": "Tableau de Bord en Direct",
+        "ar": "لوحة تحكم مباشرة"
+      },
+      "dashboard_text": {
+        "en": "See all feedback in one place. Filter by table, date, or rating. Spot patterns and track improvements.",
+        "fr": "Visualisez tous les retours en un seul endroit. Filtrez par table, date ou note.",
+        "ar": "شاهد جميع الآراء في مكان واحد. فلتر حسب الطاولة أو التاريخ أو التقييم."
+      },
+      "branding_title": {
+        "en": "Custom Branding",
+        "fr": "Personnalisation de Marque",
+        "ar": "تخصيص العلامة التجارية"
+      },
+      "branding_text": {
+        "en": "Add your logo, colors, and message. Make the feedback page feel like part of your restaurant.",
+        "fr": "Ajoutez votre logo, vos couleurs et votre message. La page de feedback reflète votre établissement.",
+        "ar": "أضف شعارك وألوانك ورسالتك. اجعل صفحة التقييم تعكس هوية مطعمك."
+      },
+      "languages_title": {
+        "en": "Multi-Language Support",
+        "fr": "Support Multilingue",
+        "ar": "دعم متعدد اللغات"
+      },
+      "languages_text": {
+        "en": "Feedback forms work in English, French, and Arabic. Perfect for diverse customers and staff.",
+        "fr": "Les formulaires fonctionnent en français, anglais et arabe. Parfait pour une clientèle diverse.",
+        "ar": "النماذج تعمل بالعربية والفرنسية والإنجليزية. مثالي للزبائن المتنوعين."
+      },
+      "photos_title": {
+        "en": "Photo Uploads",
+        "fr": "Envoi de Photos",
+        "ar": "إرسال الصور"
+      },
+      "photos_text": {
+        "en": "Let customers attach photos to their feedback. See exactly what they're talking about.",
+        "fr": "Les clients peuvent joindre des photos à leurs commentaires. Voyez exactement de quoi ils parlent.",
+        "ar": "يمكن للزبائن إرفاق صور بتعليقاتهم. شاهد بالضبط ما يتحدثون عنه."
+      },
+      "no_app_title": {
+        "en": "No App Required",
+        "fr": "Sans Application",
+        "ar": "بدون تطبيق"
+      },
+      "no_app_text": {
+        "en": "Customers just scan a QR code with their camera. Works on any smartphone, instantly.",
+        "fr": "Les clients scannent simplement le QR code. Fonctionne sur tous les smartphones, instantanément.",
+        "ar": "الزبائن يمسحون رمز QR فقط. يعمل على أي هاتف ذكي، فوراً."
+      }
+    },
+    "preview": {
+      "title": {
+        "en": "See It in Action",
+        "fr": "Voyez-le en Action",
+        "ar": "شاهده أثناء العمل"
+      },
+      "subtitle": {
+        "en": "A clean, simple interface for your customers — and a powerful dashboard for you.",
+        "fr": "Une interface simple pour vos clients — et un tableau de bord puissant pour vous.",
+        "ar": "واجهة بسيطة لزبائنك — ولوحة تحكم قوية لك."
+      },
+      "today_score": {
+        "en": "Today's Score",
+        "fr": "Note du jour",
+        "ar": "تقييم اليوم"
+      },
+      "new_feedback": {
+        "en": "New Feedback",
+        "fr": "Nouveaux avis",
+        "ar": "تعليقات جديدة"
+      },
+      "alerts": {
+        "en": "Alerts",
+        "fr": "Alertes",
+        "ar": "تنبيهات"
+      },
+      "dashboard_caption": {
+        "en": "Real-time dashboard showing today's performance at a glance",
+        "fr": "Tableau de bord en temps réel montrant les performances du jour",
+        "ar": "لوحة تحكم مباشرة تعرض أداء اليوم بنظرة واحدة"
+      }
+    },
+    "audience": {
+      "title": {
+        "en": "Built for Restaurants That Care About Their Customers",
+        "fr": "Conçu Pour les Restaurants Qui Se Soucient de Leurs Clients",
+        "ar": "مصمم للمطاعم التي تهتم بزبائنها"
+      },
+      "restaurants_title": {
+        "en": "Restaurant Owners",
+        "fr": "Propriétaires de Restaurants",
+        "ar": "أصحاب المطاعم"
+      },
+      "restaurants_text": {
+        "en": "Get honest feedback without confrontation. Know what's happening at every table.",
+        "fr": "Obtenez des retours honnêtes sans confrontation. Sachez ce qui se passe à chaque table.",
+        "ar": "احصل على آراء صادقة بدون مواجهة. اعرف ما يحدث في كل طاولة."
+      },
+      "cafes_title": {
+        "en": "Café Managers",
+        "fr": "Gérants de Cafés",
+        "ar": "مديرو المقاهي"
+      },
+      "cafes_text": {
+        "en": "Quick service means quick feedback. Catch issues before they escalate.",
+        "fr": "Service rapide, feedback rapide. Détectez les problèmes avant qu'ils ne s'aggravent.",
+        "ar": "خدمة سريعة تعني تقييم سريع. اكتشف المشاكل قبل تفاقمها."
+      },
+      "hospitality_title": {
+        "en": "Hospitality Groups",
+        "fr": "Groupes Hôteliers",
+        "ar": "مجموعات الضيافة"
+      },
+      "hospitality_text": {
+        "en": "Manage multiple locations from one dashboard. Compare performance across venues.",
+        "fr": "Gérez plusieurs établissements depuis un seul tableau de bord.",
+        "ar": "أدر عدة فروع من لوحة تحكم واحدة."
+      },
+      "small_business_title": {
+        "en": "Small Businesses",
+        "fr": "Petites Entreprises",
+        "ar": "المشاريع الصغيرة"
+      },
+      "small_business_text": {
+        "en": "No enterprise contracts. No complicated setup. Just a simple tool that works.",
+        "fr": "Pas de contrats complexes. Pas d'installation compliquée. Un outil simple qui fonctionne.",
+        "ar": "لا عقود معقدة. لا إعداد صعب. أداة بسيطة تعمل."
+      }
+    },
+    "pricing": {
+      "title": {
+        "en": "Start Listening to Your Customers Today",
+        "fr": "Commencez à Écouter Vos Clients Dès Aujourd'hui",
+        "ar": "ابدأ الاستماع إلى زبائنك اليوم"
+      },
+      "text": {
+        "en": "Try AlertTable free for 14 days. No credit card required. Cancel anytime.",
+        "fr": "Essayez AlertTable gratuitement pendant 14 jours. Sans carte bancaire. Annulez quand vous voulez.",
+        "ar": "جرّب AlertTable مجاناً لمدة 14 يوماً. بدون بطاقة بنكية. ألغِ في أي وقت."
+      },
+      "cta": {
+        "en": "Start Free Trial",
+        "fr": "Démarrer l'Essai Gratuit",
+        "ar": "ابدأ التجربة المجانية"
+      },
+      "note": {
+        "en": "Plans start at €19/month after trial",
+        "fr": "À partir de 19€/mois après l'essai",
+        "ar": "الأسعار تبدأ من 19€ شهرياً بعد التجربة"
+      }
+    },
+    "faq": {
+      "title": {
+        "en": "Questions? We've Got Answers.",
+        "fr": "Des Questions ? Nous Avons les Réponses.",
+        "ar": "أسئلة؟ لدينا الإجابات."
+      },
+      "app_needed_q": {
+        "en": "Do my customers need to download an app?",
+        "fr": "Mes clients doivent-ils télécharger une application ?",
+        "ar": "هل يحتاج زبائني لتحميل تطبيق؟"
+      },
+      "app_needed_a": {
+        "en": "No. They just scan the QR code with their phone camera. It works instantly on any smartphone.",
+        "fr": "Non. Ils scannent simplement le QR code avec leur téléphone. Ça fonctionne instantanément.",
+        "ar": "لا. يمسحون رمز QR بكاميرا هاتفهم فقط. يعمل فوراً على أي هاتف ذكي."
+      },
+      "notifications_q": {
+        "en": "How do I get notified about negative feedback?",
+        "fr": "Comment suis-je notifié des avis négatifs ?",
+        "ar": "كيف أتلقى إشعارات عن التقييمات السلبية؟"
+      },
+      "notifications_a": {
+        "en": "You'll receive an instant alert in your dashboard. You can also enable email notifications.",
+        "fr": "Vous recevrez une alerte instantanée dans votre tableau de bord. Vous pouvez aussi activer les notifications par e-mail.",
+        "ar": "ستتلقى تنبيهاً فورياً في لوحة التحكم. يمكنك أيضاً تفعيل إشعارات البريد الإلكتروني."
+      },
+      "customize_q": {
+        "en": "Can I customize the feedback form?",
+        "fr": "Puis-je personnaliser le formulaire ?",
+        "ar": "هل يمكنني تخصيص نموذج التقييم؟"
+      },
+      "customize_a": {
+        "en": "Yes. Add your logo, colors, slogan, and thank-you message. Make it match your brand.",
+        "fr": "Oui. Ajoutez votre logo, couleurs, slogan et message de remerciement. Adaptez-le à votre marque.",
+        "ar": "نعم. أضف شعارك وألوانك وشعارك ورسالة الشكر. اجعله يتناسب مع علامتك التجارية."
+      },
+      "languages_q": {
+        "en": "What languages are supported?",
+        "fr": "Quelles langues sont supportées ?",
+        "ar": "ما اللغات المدعومة؟"
+      },
+      "languages_a": {
+        "en": "The feedback form supports English, French, and Arabic. Your customers can switch languages easily.",
+        "fr": "Le formulaire supporte le français, l'anglais et l'arabe. Vos clients peuvent changer de langue facilement.",
+        "ar": "يدعم النموذج العربية والفرنسية والإنجليزية. يمكن لزبائنك التبديل بين اللغات بسهولة."
+      },
+      "setup_time_q": {
+        "en": "How long does setup take?",
+        "fr": "Combien de temps prend l'installation ?",
+        "ar": "كم يستغرق الإعداد؟"
+      },
+      "setup_time_a": {
+        "en": "About 5 minutes. Create your account, generate QR codes, and print them. That's it.",
+        "fr": "Environ 5 minutes. Créez votre compte, générez les QR codes et imprimez-les. C'est tout.",
+        "ar": "حوالي 5 دقائق. أنشئ حسابك، أنشئ رموز QR، واطبعها. هذا كل شيء."
+      },
+      "security_q": {
+        "en": "Is my customer data secure?",
+        "fr": "Les données de mes clients sont-elles sécurisées ?",
+        "ar": "هل بيانات زبائني آمنة؟"
+      },
+      "security_a": {
+        "en": "Yes. All data is encrypted and stored securely. Feedback is anonymous by default.",
+        "fr": "Oui. Toutes les données sont cryptées et stockées de manière sécurisée. Les avis sont anonymes par défaut.",
+        "ar": "نعم. جميع البيانات مشفرة ومخزنة بأمان. التقييمات مجهولة بشكل افتراضي."
+      }
+    },
+    "final": {
+      "title": {
+        "en": "Stop Guessing. Start Listening.",
+        "fr": "Arrêtez de Deviner. Commencez à Écouter.",
+        "ar": "توقف عن التخمين. ابدأ بالاستماع."
+      },
+      "text": {
+        "en": "Your customers have opinions. AlertTable helps you hear them — in real time, when it matters most.",
+        "fr": "Vos clients ont des opinions. AlertTable vous aide à les entendre — en temps réel, quand ça compte.",
+        "ar": "زبائنك لديهم آراء. AlertTable يساعدك على سماعها — في الوقت الحقيقي، عندما يهم الأمر."
+      },
+      "cta": {
+        "en": "Get Started Free",
+        "fr": "Commencer Gratuitement",
+        "ar": "ابدأ مجاناً"
+      },
+      "note": {
+        "en": "Join hundreds of restaurants improving their service every day.",
+        "fr": "Rejoignez des centaines de restaurants qui améliorent leur service chaque jour.",
+        "ar": "انضم لمئات المطاعم التي تحسن خدمتها كل يوم."
+      }
+    },
+    "footer": {
+      "tagline": {
+        "en": "Real-time feedback for restaurants that care.",
+        "fr": "Avis en temps réel pour les restaurants qui se soucient.",
+        "ar": "تقييمات فورية للمطاعم التي تهتم."
+      },
+      "product": {
+        "en": "Product",
+        "fr": "Produit",
+        "ar": "المنتج"
+      },
+      "company": {
+        "en": "Company",
+        "fr": "Entreprise",
+        "ar": "الشركة"
+      },
+      "contact": {
+        "en": "Contact",
+        "fr": "Contact",
+        "ar": "تواصل"
+      },
+      "privacy": {
+        "en": "Privacy Policy",
+        "fr": "Politique de confidentialité",
+        "ar": "سياسة الخصوصية"
+      },
+      "terms": {
+        "en": "Terms of Service",
+        "fr": "Conditions d'utilisation",
+        "ar": "شروط الخدمة"
+      },
+      "rights": {
+        "en": "All rights reserved.",
+        "fr": "Tous droits réservés.",
+        "ar": "جميع الحقوق محفوظة."
+      }
+    }
+  },
   "branding": {
     "title": {
       "en": "Branding",
